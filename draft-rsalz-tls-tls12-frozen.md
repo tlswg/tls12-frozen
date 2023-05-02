@@ -3,7 +3,7 @@ title: "TLS 1.2 is Frozen"
 abbrev: "tls1.2-frozen"
 category: info
 
-docname: draft-rsalz-tls-tls12-is-frozen-latest
+docname: draft-rsalz-tls-tls12-frozen-latest
 submissiontype: IETF
 number:
 date:
@@ -18,7 +18,7 @@ venue:
   group: "Transport Layer Security"
   type: "Working Group"
   mail: "tls@ietf.org"
-  github: "richsalz/draft-ietf-tls-tls12-is-frozen"
+  github: "richsalz/draft-tls12-frozen"
 
 author:
   fullname: Rich Salz
