@@ -26,11 +26,11 @@ author:
   email: rsalz@akamai.com
 
 normative:
-  RFC5246:
-  TLS12: RFC8446
-  TLS13: RFC8447
+  TLS12: RFC5246
+  TLS13: RFC8446
+  TLS13REG: RFC8447
   QUICTLS: RFC9001
-  DNSUSINGTLS: RFC8310
+  DNSTLS: RFC8310
 
 informative:
   PQC:
@@ -68,8 +68,8 @@ assume its existance.
 
 # Introduction
 
-TLS 1.2 {{RFC5246}} is in widespread use and can be configured in a secure
-manner: there is nothing wrong with it. TLS 1.3 {{TLS12}} is also in
+TLS 1.2 {{TLS12}} is in widespread use and can be configured in a secure
+manner: there is nothing wrong with it. TLS 1.3 {{TLS13}} is also in
 widespread use and fixes some known deficiencies with TLS 1.2, such as
 encrypting more of the traffic so that it is not readable by outsiders.
 
@@ -113,7 +113,7 @@ For example, QUIC {{QUICTLS}} requires TLS 1.3 and specifies that endpoints
 MUST terminate the connection if an older version is used.
 
 If deployment considerations are a concern, the protocol MAY specify TLS 1.2.
-For example the Usage Profile for DNS over TLS {{DNSUSINGTLS}} specifies
+For example the Usage Profile for DNS over TLS {{DNSTLS}} specifies
 TLS 1.2 and allows TLS 1.3. If this document were being rewritten today --
 it is now five years old -- those preferences would be reversed.
 
@@ -123,7 +123,7 @@ Security considerations are discussed throughout this document.
 
 # IANA Considerations {#iana}
 
-IANA will stop accepting registrations for any TLS parameters {{TLS13}}
+IANA will stop accepting registrations for any TLS parameters {{TLS13REG}}
 except for the following:
 
 - TLS Exporter Labels
