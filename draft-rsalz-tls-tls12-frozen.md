@@ -52,35 +52,59 @@ informative:
 
 --- abstract
 
-TLS 1.2 is in widespread use and can be configured in a secure
-manner: there is nothing wrong with it. TLS 1.3 is also in
+TLS 1.2 is in widespread use and can be configured such that it provides good
+security properties. TLS 1.3 is also in
 widespread use and fixes some known deficiencies with TLS 1.2, such as
-encrypting more of the traffic so that it is not readable by outsiders.
+removing error-prone cryptographic primitives and encrypting more of the traffic
+so that it is not readable by outsiders.
 
 Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that TLS 1.2
 is frozen: no new algorithms or extensions will be approved.
 
-Further TLS 1.3 use is widespread, and new protocols should require and
-assume its existance.
+Further, TLS 1.3 use is widespread, and new protocols should require and
+assume its existence.
 
 --- middle
 
 # Introduction
 
-TLS 1.2 {{TLS12}} is in widespread use and can be configured in a secure
-manner: there is nothing wrong with it. TLS 1.3 {{TLS13}} is also in
-widespread use and fixes some known deficiencies with TLS 1.2, such as
-encrypting more of the traffic so that it is not readable by outsiders.
+TLS 1.2 is in widespread use and can be configured such that it provides good
+security properties. However, this protocol version suffers from several
+deficiencies:
+
+1. While application layer traffic is always encrypted, most of the handshake
+messages are not encrypted. Therefore, the privacy provided is suboptimal.
+
+2. The list of cryptographic primitives specified for the protocol, both in-use 
+primitives and deprecated ones, includes several primitives that were a source for 
+vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suites, 
+and problematic finite-field Diffie-Hellman group negotiation. See the {{sec-considerations}} Section for elaboration.
+
+3. The original protocol, as-is, does not provide security (cite Renegotiation
+attack). Rather, some extensions are required to provide security.
+
+In contrast, TLS 1.3 {{TLS13}} is also in
+widespread use and fixes most known deficiencies with TLS 1.2, such as
+encrypting more of the traffic so that it is not readable by outsiders and
+removing most cryptographic primitives considered dangerous. Importantly, TLS
+1.3 enjoys robust security proofs and provides excellent security as-is.
 
 Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that TLS 1.2
 is frozen: no new algorithms or extensions will be approved.
 
+(TODO Nimrod: I'd consider stating the reasons the WG is heading in this direction:
+1. We have limited resources, and don't want to spend them on TLS 1.2.
+2. We want to encourage TLS 1.3 deployment.
+3. We want to be clear that this version will eventually be deprecated, and want
+to prepare the ground for an easy deprecation effort.
+Please let me know if you'd like me to write that?)
+
 Further TLS 1.3 use is widespread, and new protocols should require and
-assume its existance.
+assume its existence.
 
 # Conventions and Definitions
 
@@ -96,7 +120,7 @@ around the same time {{CFRGSLIDES}}.
 
 While the industry is waiting for NIST to finish standardization, the
 IETF has several efforts underway.
-A working was formed in early 2013 to work on use of PQC in IETF protocols,
+A working group was formed in early 2013 to work on use of PQC in IETF protocols,
 {{PQUIPWG}}.
 Several other working groups, including TLS {{TLSWG}},
 are working on
@@ -109,18 +133,26 @@ TLS 1.2 is WILL NOT be supported (see {{iana}}).
 
 # TLS Use by Other Protocols
 
-Any new protocol that uses TLS MUST have TLS 1.3 as its default.
+Any new protocol that uses TLS MUST specify TLS 1.3 as its default.
 For example, QUIC {{QUICTLS}} requires TLS 1.3 and specifies that endpoints
 MUST terminate the connection if an older version is used.
 
-If deployment considerations are a concern, the protocol MAY specify TLS 1.2.
-For example the Usage Profile for DNS over TLS {{DNSTLS}} specifies
-TLS 1.2 and allows TLS 1.3. If this document were being rewritten today --
-it is now five years old -- those preferences would be reversed.
+If deployment considerations are a concern, the protocol MAY specify TLS 1.2 as
+an additional, non-default option.
+As a counter example, the Usage Profile for DNS over TLS {{DNSTLS}} specifies
+TLS 1.2 as the default, while also allowing TLS 1.3.
+For newer specifications that choose to support TLS 1.2, those preferences are
+to be reversed.
 
-# Security Considerations
+# Security Considerations {#sec-considerations}
 
-Security considerations are discussed throughout this document.
+(TODO Nimrod) I suggest giving the following references as security considerations:
+- RSA key exchange and DH: Refer to draft-obsolete-kex.
+- CBC cipher suites: I'll cite papers.
+- Renegotiation: Refer to RFC 5746.
+- I can add a paragraph of further prominent attacks in TLS history, explain
+  that most of these are prevented in TLS 1.3.
+Please let me know if you'd like me to write that?
 
 # IANA Considerations {#iana}
 
