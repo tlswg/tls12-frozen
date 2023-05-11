@@ -97,14 +97,25 @@ algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that TLS 1.2
 is frozen: no new algorithms or extensions will be approved.
 
-(TODO Nimrod: I'd consider stating the reasons the WG is heading in this direction:
-1. We have limited resources, and don't want to spend them on TLS 1.2.
-2. We want to encourage TLS 1.3 deployment.
-3. We want to be clear that this version will eventually be deprecated, and want
-to prepare the ground for an easy deprecation effort.
-Please let me know if you'd like me to write that?)
+The reasons for freezing TLS 1.2 are as follows:
 
-Further TLS 1.3 use is widespread, and new protocols should require and
+1. Specifying and deploying new extension points requires resources, both in WG
+discussions and in deployment efforts. These resources are better spent on
+TLS 1.3.
+
+2. For deployments that require recent extension points, it is best to deploy
+TLS 1.3. This not only allows using these extension points, but also improves
+security and efficiency in general. (On the other hand, continuing to extend TLS
+1.2 would have created a slight incentive to avoid upgrading to TLS 1.3.)
+
+3. TLS 1.2 will eventually be deprecated. Experience shows that deprecating
+cryptographic primitives and protocols can be laborious and require a long
+timeline (cite David Benjamin's RWC talk, Ryan Sleevi's SHA1 history).
+Among other advantages, the decision to freeze TLS 1.2 clearly communicates to
+vendors and operators that they should upgrade to TLS 1.3, and hopefully this
+will allow for an easier deprecation story when TLS 1.2 is eventually deprecated.
+
+Further, TLS 1.3 use is widespread, and new protocols should require and
 assume its existence.
 
 # Conventions and Definitions
