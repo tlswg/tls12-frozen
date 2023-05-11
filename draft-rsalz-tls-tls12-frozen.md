@@ -49,6 +49,19 @@ informative:
   TLSWG:
     target: https://datatracker.ietf.org/wg/tls/about/
     title: Transport Layer Security
+  TRIPLESHAKE:
+    target: https://mitls.org/pages/attacks/3SHAKE
+    title: Triple Handshakes Considered Harmful Breaking and Fixing Authentication over TLS
+  RENEG1:
+    title: Understanding the TLS Renegotiation Attack
+    author:
+      name: Eric Rescorla
+    target: https://web.archive.org/web/20091231034700/http://www.educatedguesswork.org/2009/11/understanding_the_tls_renegoti.html
+  RENEG2:
+    title: Authentication Gap in TLS Renegotiation
+    author:
+      name: Marsh Ray
+    target: https://web.archive.org/web/20091228061844/http://extendedsubset.com/?p=8
 
 --- abstract
 
@@ -68,7 +81,7 @@ assume its existence.
 
 --- middle
 
-# Introduction
+# Introduction {#sec-reasons}
 
 TLS 1.2 {{TLS12}} is in widespread use and can be configured such that it provides good
 security properties. However, this protocol version suffers from several
@@ -157,6 +170,21 @@ For newer specifications that choose to support TLS 1.2, those preferences are
 to be reversed.
 
 # Security Considerations {#sec-considerations}
+
+TLS 1.2 was specified with several cryptographic primitives and design choices
+that have historically hindered its security. The purpose of this section is to
+briefly survey several such prominent problems that have affected the protocol.
+It should be noted, however, that TLS 1.2 can be configured securely; it is
+merely much more difficult to configure it securely as opposed to using its
+modern successor, TLS 1.3. Refer to Section {{sec-reasons}} for the reasons for
+the decision to freeze the protocol under these circumstances.
+
+Firstly, the TLS 1.2 protocol, without any extension points, is vulnerable to
+the renegotiation attack and the Triple Handshake attack. Broadly, these attacks
+exploit the protocol's support for renegotiation in order to inject a prefix
+chosen by the attacker into the plaintext stream. This is usually a devastating
+threat in practice, that allows e.g. obtaining secret cookies in a web setting.
+Refer to {{RENEG1}}, {{RENEG2}}, {{TRIPLESHAKE}} for elaboration.
 
 (TODO Nimrod) I suggest giving the following references as security considerations:
 - RSA key exchange and DH: Refer to draft-obsolete-kex.
