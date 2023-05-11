@@ -70,17 +70,18 @@ assume its existence.
 
 # Introduction
 
-TLS 1.2 is in widespread use and can be configured such that it provides good
+TLS 1.2 {{TLS12}} is in widespread use and can be configured such that it provides good
 security properties. However, this protocol version suffers from several
 deficiencies:
 
 1. While application layer traffic is always encrypted, most of the handshake
 messages are not encrypted. Therefore, the privacy provided is suboptimal.
 
-2. The list of cryptographic primitives specified for the protocol, both in-use 
-primitives and deprecated ones, includes several primitives that were a source for 
-vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suites, 
-and problematic finite-field Diffie-Hellman group negotiation. See the {{sec-considerations}} Section for elaboration.
+2. The list of cryptographic primitives specified for the protocol, both in-use
+primitives and deprecated ones, includes several primitives that were a source for
+vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suites,
+and problematic finite-field Diffie-Hellman group negotiation.
+See {{sec-considerations}} for elaboration.
 
 3. The original protocol, as-is, does not provide security (cite Renegotiation
 attack). Rather, some extensions are required to provide security.
