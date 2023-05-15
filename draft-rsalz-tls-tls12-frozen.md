@@ -158,23 +158,40 @@ that have historically hindered its security. The purpose of this section is to
 briefly survey several such prominent problems that have affected the protocol.
 It should be noted, however, that TLS 1.2 can be configured securely; it is
 merely much more difficult to configure it securely as opposed to using its
-modern successor, TLS 1.3. Refer to Section {{sec-reasons}} for the reasons for
-the decision to freeze the protocol under these circumstances.
+modern successor, TLS 1.3.
 
 Firstly, the TLS 1.2 protocol, without any extension points, is vulnerable to
 the renegotiation attack and the Triple Handshake attack. Broadly, these attacks
 exploit the protocol's support for renegotiation in order to inject a prefix
 chosen by the attacker into the plaintext stream. This is usually a devastating
 threat in practice, that allows e.g. obtaining secret cookies in a web setting.
-Refer to {{RENEG1}}, {{RENEG2}}, {{TRIPLESHAKE}} for elaboration.
+Refer to {{RENEG1}}, {{RENEG2}}, {{TRIPLESHAKE}} for elaboration. In light of
+the above problems, {{!RFC5746}} specifies an extension that prevents this
+category of attacks. To securely deploy TLS 1.2, either renegotiation must be
+disabled entirely, or this extension must be present. Additionally, clients must
+not allow servers to renegotiate the certificate during a connection.
 
-(TODO Nimrod) I suggest giving the following references as security considerations:
-- RSA key exchange and DH: Refer to draft-obsolete-kex.
-- CBC cipher suites: I'll cite papers.
-- Renegotiation: Refer to RFC 5746.
-- I can add a paragraph of further prominent attacks in TLS history, explain
-  that most of these are prevented in TLS 1.3.
-Please let me know if you'd like me to write that?
+Secondly, the original key exchange methods specified for the protocol, namely
+RSA key exchange and finite field Diffie-Hellman, suffer from several
+weaknesses. As before, to securely deploy the protocol, these key exchange
+methods must be disabled.
+Refer to draft-obsolete-kex for elaboration (TODO Nimrod I guess we will anyway
+wait for WGLC for draft-obsolete-kex, so no sense to temporarily refer to the
+draft.)
+
+Thirdly, symmetric ciphers which were widely-used in the protocol, namely RC4
+and CBC cipher suites, suffer from several weaknesses. RC4 suffers from
+exploitable biases in its key stream; see {{!RFC7465}}. CBC cipher suites have
+been a source of vulnerabilities throughout the years. A straightforward
+implementation of these cipher suites inherently suffers from the Lucky13 timing
+attack (TODO Nimrod cite). The first attempt to implement the cipher suites in
+constant time introduced an even more severe vulnerability (TODO Nimrod cite
+Juraj's paper). There have been further similar vulnerabilities throughout the
+years exploiting CBC cipher suites; refer to e.g. (TODO Nimrod cite the CBC
+scanning paper) for an example and a survey of similar works (Section 3.4).
+
+And lastly, historically the protocol was affected by several other attacks that
+TLS 1.3 is immune to: BEAST, Logjam, FREAK, and SLOTH (TODO Nimrod cite all).
 
 # IANA Considerations {#iana}
 
