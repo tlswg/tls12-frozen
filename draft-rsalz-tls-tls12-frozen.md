@@ -158,7 +158,8 @@ that have historically hindered its security. The purpose of this section is to
 briefly survey several such prominent problems that have affected the protocol.
 It should be noted, however, that TLS 1.2 can be configured securely; it is
 merely much more difficult to configure it securely as opposed to using its
-modern successor, TLS 1.3.
+modern successor, TLS 1.3. See {{!RFC9325}} for a more thorough guide on the
+secure deployment of TLS 1.2.
 
 Firstly, the TLS 1.2 protocol, without any extension points, is vulnerable to
 the renegotiation attack and the Triple Handshake attack. Broadly, these attacks
