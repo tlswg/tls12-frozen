@@ -21,9 +21,13 @@ venue:
   github: "richsalz/tls12-frozen"
 
 author:
+-
   fullname: Rich Salz
   organization: Akamai Technologies
   email: rsalz@akamai.com
+-
+  fullname: Nimrod Aviram
+  email: nimrod.aviram@gmail.com
 
 normative:
   TLS12: RFC5246
@@ -60,8 +64,69 @@ informative:
   RENEG2:
     title: Authentication Gap in TLS Renegotiation
     author:
-      name: Marsh Ray
+      - name: Marsh Ray
     target: https://web.archive.org/web/20091228061844/http://extendedsubset.com/?p=8
+  LUCKY13:
+    title: "Lucky Thirteen: Breaking the TLS and DTLS record protocols"
+    target: http://www.isg.rhul.ac.uk/tls/TLStiming.pdf
+    author:
+      - ins: N. J. Al Fardan
+      - ins: K. G. Paterson
+  LUCKY13FIX:
+    title: "Systematic fuzzing and testing of TLS libraries"
+    target: https://nds.rub.de/media/nds/veroeffentlichungen/2016/10/19/tls-attacker-ccs16.pdf
+    author:
+      name: Juraj Somorovsky
+  CBCSCANNING:
+    title: Scalable Scanning and Automatic Classification of TLS Padding Oracle Vulnerabilities
+    target: https://www.usenix.org/system/files/sec19-merget.pdf
+    author:
+      - name: Robert Merget
+      - name: Juraj Somorovsky
+      - name: Nimrod Aviram
+      - name: Craig Young
+      - name: Janis Fliegenschmidt
+      - name: Jörg Schwenk
+      - name: Yuval Shavitt
+  BEAST:
+    title: "Here come the xor ninjas"
+    target: http://www.hpcc.ecs.soton.ac.uk/dan/talks/bullrun/Beast.pdf
+    author:
+      - name: Thai Duong
+      - name: Juliano Rizzo
+  WEAKDH:
+    title: "Imperfect forward secrecy: How Diffie-Hellman fails in practice"
+    target: https://dl.acm.org/doi/pdf/10.1145/2810103.2813707
+    author:
+      - ins: D. Adrian
+      - ins: K. Bhargavan
+      - ins: Z. Durumeric
+      - ins: P. Gaudry
+      - ins: M. Green
+      - ins: J. A.Halderman
+      - ins: N. Heninger
+      - ins: D. Springall
+      - ins: E. Thomé
+      - ins: L. Valenta
+      - ins: B. VanderSloot
+  FREAK:
+    title: "A messy state of the union: Taming the composite state machines of TLS"
+    target: https://inria.hal.science/hal-01114250/file/messy-state-of-the-union-oakland15.pdf
+    author:
+      - name: Benjamin Beurdouche
+      - name: Karthikeyan Bhargavan
+      - name: Antoine Delignat-Lavaud
+      - name: Cédric Fournet
+      - name: Markulf Kohlweiss
+      - name: Alfredo Pironti
+      - name: Pierre-Yves Strub
+      - name: Jean Karim Zinzindohoue
+  SLOTH:
+    title: "Transcript collision attacks: Breaking authentication in TLS, IKE, and SSH"
+    target: https://inria.hal.science/hal-01244855/file/SLOTH_NDSS16.pdf
+    author:
+      - name: Karthikeyan Bhargavan
+      - name: Gaëtan Leurent
 
 --- abstract
 
@@ -176,7 +241,7 @@ Secondly, the original key exchange methods specified for the protocol, namely
 RSA key exchange and finite field Diffie-Hellman, suffer from several
 weaknesses. As before, to securely deploy the protocol, these key exchange
 methods must be disabled.
-Refer to draft-obsolete-kex for elaboration (TODO Nimrod I guess we will anyway
+Refer to draft-obsolete-kex for elaboration (TODO I guess we will anyway
 wait for WGLC for draft-obsolete-kex, so no sense to temporarily refer to the
 draft.)
 
@@ -185,14 +250,15 @@ and CBC cipher suites, suffer from several weaknesses. RC4 suffers from
 exploitable biases in its key stream; see {{!RFC7465}}. CBC cipher suites have
 been a source of vulnerabilities throughout the years. A straightforward
 implementation of these cipher suites inherently suffers from the Lucky13 timing
-attack (TODO Nimrod cite). The first attempt to implement the cipher suites in
-constant time introduced an even more severe vulnerability (TODO Nimrod cite
-Juraj's paper). There have been further similar vulnerabilities throughout the
-years exploiting CBC cipher suites; refer to e.g. (TODO Nimrod cite the CBC
-scanning paper) for an example and a survey of similar works (Section 3.4).
+attack {{LUCKY13}}. The first attempt to implement the cipher suites in
+constant time introduced an even more severe vulnerability.
+There have been further similar vulnerabilities throughout the
+years exploiting CBC cipher suites; refer to e.g. {{CBCSCANNING}}
+for an example and a survey of similar works.
 
 And lastly, historically the protocol was affected by several other attacks that
-TLS 1.3 is immune to: BEAST, Logjam, FREAK, and SLOTH (TODO Nimrod cite all).
+TLS 1.3 is immune to:
+BEAST {{BEAST}}, Logjam {{WEAKDH}}, FREAK {{FREAK}}, and SLOTH {{SLOTH}}.
 
 # IANA Considerations {#iana}
 
