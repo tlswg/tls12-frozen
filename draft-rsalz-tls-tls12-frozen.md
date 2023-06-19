@@ -250,7 +250,7 @@ and CBC cipher suites, suffer from several weaknesses. RC4 suffers from
 exploitable biases in its key stream; see {{!RFC7465}}. CBC cipher suites have
 been a source of vulnerabilities throughout the years. A straightforward
 implementation of these cipher suites inherently suffers from the Lucky13 timing
-attack {{LUCKY13}}. The first attempt to implement the cipher suites in
+attack {{LUCKY13}}, {{LUCKY13FIX}}. The first attempt to implement the cipher suites in
 constant time introduced an even more severe vulnerability.
 There have been further similar vulnerabilities throughout the
 years exploiting CBC cipher suites; refer to e.g. {{CBCSCANNING}}
