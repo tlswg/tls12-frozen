@@ -1,5 +1,5 @@
 ---
-title: "TLS 1.2 is Frozen"
+title: "TLS 1.2 is in Feature Freeze"
 abbrev: "tls1.2-frozen"
 category: info
 
@@ -138,8 +138,8 @@ so that it is not readable by outsiders.
 
 Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
-added without defining a new protocol. This document specifies that TLS 1.2
-is frozen: no new algorithms or extensions will be approved.
+added without defining a new protocol. This document specifies that outside of
+urgent security fixes, no new features will be approved for TLS 1.2.
 
 Further, TLS 1.3 use is widespread, and new protocols should require and
 assume its existence.
@@ -172,8 +172,8 @@ removing most cryptographic primitives considered dangerous. Importantly, TLS
 
 Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
-added without defining a new protocol. This document specifies that TLS 1.2
-is frozen: no new algorithms or extensions will be approved.
+added without defining a new protocol. This document specifies that outside of
+urgent security fixes, no new features will be approved for TLS 1.2.
 
 Further, TLS 1.3 use is widespread, and new protocols should require and
 assume its existence.
@@ -205,7 +205,8 @@ TLS 1.2 is WILL NOT be supported (see {{iana}}).
 
 # TLS Use by Other Protocols
 
-Any new protocol that uses TLS MUST specify TLS 1.3 as its default.
+Any new protocol that uses TLS MUST specify as its default TLS 1.3 (or a higher
+TLS version, when one becomes stadardized).
 For example, QUIC {{QUICTLS}} requires TLS 1.3 and specifies that endpoints
 MUST terminate the connection if an older version is used.
 
