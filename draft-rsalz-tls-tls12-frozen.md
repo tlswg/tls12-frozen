@@ -161,8 +161,9 @@ vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suite
 and problematic finite-field Diffie-Hellman group negotiation.
 See {{sec-considerations}} for elaboration.
 
-3. The original protocol, as-is, does not provide security (cite Renegotiation
-attack). Rather, some extensions are required to provide security.
+3. The original protocol, as-is, does not provide security due to the
+"Renegotiation" class of attacks (see {{sec-considerations}}). Rather, some
+extensions are required to provide security.
 
 In contrast, TLS 1.3 {{TLS13}} is also in
 widespread use and fixes most known deficiencies with TLS 1.2, such as
