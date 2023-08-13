@@ -140,6 +140,8 @@ Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
 urgent security fixes, no new features will be approved for TLS 1.2.
+This prescription does not pertain to DTLS (in any DTLS version); it pertains to
+TLS only.
 
 --- middle
 
@@ -172,6 +174,8 @@ Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
 urgent security fixes, no new features will be approved for TLS 1.2.
+This prescription does not pertain to DTLS (in any DTLS version); it pertains to
+TLS only.
 
 # Conventions and Definitions
 

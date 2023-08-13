@@ -138,6 +138,8 @@ so that it is not readable by outsiders.
 
 Since TLS 1.3 use is widespread, new protocols must require and
 assume its existence.
+This prescription does not pertain to DTLS (in any DTLS version); it pertains to
+TLS only.
 
 --- middle
 
@@ -168,6 +170,8 @@ removing most cryptographic primitives considered dangerous. Importantly, TLS
 
 This document specifies that, since TLS 1.3 use is widespread, new protocols
 must require and assume its existence.
+This prescription does not pertain to DTLS (in any DTLS version); it pertains to
+TLS only.
 
 # Conventions and Definitions
 
