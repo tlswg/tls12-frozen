@@ -1,9 +1,9 @@
 ---
-title: "TLS 1.2 is in Feature Freeze"
-abbrev: "tls1.2-frozen"
+title: "New Protocols Must Require TLS 1.3"
+abbrev: "require-tls1.3"
 category: info
 
-docname: draft-rsalz-tls-tls12-frozen-latest
+docname: draft-rsalz-tls-require-tls13-latest
 submissiontype: IETF
 number:
 date:
@@ -136,10 +136,8 @@ widespread use and fixes some known deficiencies with TLS 1.2, such as
 removing error-prone cryptographic primitives and encrypting more of the traffic
 so that it is not readable by outsiders.
 
-Both versions have several extension points, so items like new cryptographic
-algorithms, new supported groups (formerly "named curves"),  etc., can be
-added without defining a new protocol. This document specifies that outside of
-urgent security fixes, no new features will be approved for TLS 1.2.
+Since TLS 1.3 use is widespread, new protocols must require and
+assume its existence.
 
 --- middle
 
@@ -158,9 +156,9 @@ vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suite
 and problematic finite-field Diffie-Hellman group negotiation.
 See {{sec-considerations}} for elaboration.
 
-3. The original protocol, as-is, does not provide security due to the
-"Renegotiation" class of attacks (see {{sec-considerations}}). Rather, some
-extensions are required to provide security.
+3. The original protocol, as-is, does not provide security {{RENEG1}},
+{{RENEG2}}, {{TRIPLESHAKE}}. Rather, some extensions are required to provide
+security.
 
 In contrast, TLS 1.3 {{TLS13}} is also in
 widespread use and fixes most known deficiencies with TLS 1.2, such as
@@ -168,10 +166,8 @@ encrypting more of the traffic so that it is not readable by outsiders and
 removing most cryptographic primitives considered dangerous. Importantly, TLS
 1.3 enjoys robust security proofs and provides excellent security as-is.
 
-Both versions have several extension points, so items like new cryptographic
-algorithms, new supported groups (formerly "named curves"),  etc., can be
-added without defining a new protocol. This document specifies that outside of
-urgent security fixes, no new features will be approved for TLS 1.2.
+This document specifies that, since TLS 1.3 use is widespread, new protocols
+must require and assume its existence.
 
 # Conventions and Definitions
 
@@ -197,6 +193,22 @@ transition from classic to a post-quantum world.
 For TLS it is important to note that the focus of these efforts is TLS 1.3
 or later.
 TLS 1.2 is WILL NOT be supported (see {{iana}}).
+This is one more reason for new protocols to default to TLS 1.3, where
+post-quantum cryptography is expected to be supported.
+
+# TLS Use by Other Protocols
+
+Any new protocol that uses TLS MUST specify as its default TLS 1.3 (or a higher
+TLS version, when one becomes stadardized).
+For example, QUIC {{QUICTLS}} requires TLS 1.3 and specifies that endpoints
+MUST terminate the connection if an older version is used.
+
+If deployment considerations are a concern, the protocol MAY specify TLS 1.2 as
+an additional, non-default option.
+As a counter example, the Usage Profile for DNS over TLS {{DNSTLS}} specifies
+TLS 1.2 as the default, while also allowing TLS 1.3.
+For newer specifications that choose to support TLS 1.2, those preferences are
+to be reversed.
 
 # Security Considerations {#sec-considerations}
 
@@ -244,15 +256,7 @@ BEAST {{BEAST}}, Logjam {{WEAKDH}}, FREAK {{FREAK}}, and SLOTH {{SLOTH}}.
 
 # IANA Considerations {#iana}
 
-IANA will stop accepting registrations for any TLS parameters {{TLS13REG}}
-except for the following:
-
-- TLS Exporter Labels
-- TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs
-
-Entries in any other TLS protocol registry should have an indication like
-"For TLS 1.3 or later" in their entry.
-
+This document makes no requests to IANA.
 
 --- back
 
