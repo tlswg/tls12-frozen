@@ -151,11 +151,15 @@ deficiencies:
 
 1. While application layer traffic is always encrypted, most of the handshake
 messages are not encrypted. Therefore, the privacy provided is suboptimal.
+This is a protocol issue that cannot be addressed by configuration.
 
 2. The list of cryptographic primitives specified for the protocol, both in-use
 primitives and deprecated ones, includes several primitives that were a source for
 vulnerabilities throughout the years, such as RSA key exchange, CBC cipher suites,
 and problematic finite-field Diffie-Hellman group negotiation.
+This deficiency may be addressed through proper configuration; however,
+experience shows that configuration mistakes are common, especially when
+deploying cryptography.
 See {{sec-considerations}} for elaboration.
 
 3. The original protocol, as-is, does not provide security {{RENEG1}},
