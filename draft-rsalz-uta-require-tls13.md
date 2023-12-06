@@ -199,7 +199,7 @@ transition from classic to a post-quantum world.
 
 For TLS it is important to note that the focus of these efforts is TLS 1.3
 or later.
-TLS 1.2 is WILL NOT be supported (see {{iana}}).
+TLS 1.2 WILL NOT be supported (see {{iana}}).
 This is one more reason for new protocols to default to TLS 1.3, where
 post-quantum cryptography is expected to be supported.
 
