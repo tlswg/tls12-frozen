@@ -33,8 +33,6 @@ normative:
   TLS12: RFC5246
   TLS13: RFC8446
   TLS13REG: RFC8447
-  QUICTLS: RFC9001
-  DNSTLS: RFC8310
 
 informative:
   PQC:
@@ -187,7 +185,8 @@ TLS only.
 
 # Implications for post-quantum cryptography
 
-Quantum computers, once available, will have a huge impact on TLS.
+Cryptographically relevant quantum computers, once available, will have a
+huge impact on RSA, FFDH, and ECC which are currently used in TLS.
 In 2016, the US National Institute of Standards and Technology started a
 multi-year effort to standardize algorithms that will be "safe"
 once quantum computers are feasible {{PQC}}. First IETF discussions happened
