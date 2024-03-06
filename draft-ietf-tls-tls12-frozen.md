@@ -3,7 +3,7 @@ title: "TLS 1.2 is in Feature Freeze"
 abbrev: "tls1.2-frozen"
 category: info
 
-docname: draft-rsalz-tls-tls12-frozen-latest
+docname: draft-ietf-tls-tls12-frozen-latest
 submissiontype: IETF
 number:
 date:
@@ -18,7 +18,7 @@ venue:
   group: "Transport Layer Security"
   type: "Working Group"
   mail: "tls@ietf.org"
-  github: "richsalz/tls12-frozen"
+  github: "tlswg/tls12-frozen"
 
 author:
 -
@@ -203,7 +203,8 @@ transition from classic to a post-quantum world.
 
 For TLS it is important to note that the focus of these efforts is TLS 1.3
 or later.
-TLS 1.2 is WILL NOT be supported (see {{iana}}).
+Bluntly, post-quantum cryptography for
+TLS 1.2 WILL NOT be supported (see {{iana}}).
 
 # Security Considerations {#sec-considerations}
 
