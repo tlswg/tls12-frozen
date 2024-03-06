@@ -1,21 +1,14 @@
 # TLS Drafts
 
-This is the working area for individual Internet-Drafts.
+This is the working area for two Internet-Drafts.
 
 ## TLS 1.2 is in Feature Freeze
 
-* [Editor's Copy](https://richsalz.github.io/tls12-frozen/#go.draft-rsalz-tls-tls12-frozen.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-rsalz-tls-tls12-frozen)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-rsalz-tls-tls12-frozen)
-* [Compare Editor's Copy to Individual Draft](https://richsalz.github.io/tls12-frozen/#go.draft-rsalz-tls-tls12-frozen.diff)
+Adopted by the TLS WG.
 
 ## New Protocols Must Require TLS 1.3
 
-* [Editor's Copy](https://richsalz.github.io/tls12-frozen/#go.draft-rsalz-uta-require-tls13.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-rsalz-uta-require-tls13)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-rsalz-uta-require-tls13)
-* [Compare Editor's Copy to Individual Draft](https://richsalz.github.io/tls12-frozen/#go.draft-rsalz-uta-require-tls13.diff)
-
+Under consideration for adoption by the UTA WG.
 
 ## Contributing
 
