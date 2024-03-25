@@ -5,11 +5,11 @@
 Transport Layer Security                                         R. Salz
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                 N. Aviram
-Expires: 15 June 2024                                   13 December 2023
+Expires: 26 September 2024                                 25 March 2024
 
 
-                   New Protocols Must Require TLS 1.3
-                  draft-rsalz-uta-require-tls13-latest
+                      TLS 1.2 is in Feature Freeze
+                   draft-ietf-tls-tls12-frozen-latest
 
 Abstract
 
@@ -19,16 +19,19 @@ Abstract
    error-prone cryptographic primitives and encrypting more of the
    traffic so that it is not readable by outsiders.
 
-   Since TLS 1.3 use is widespread, new protocols must require and
-   assume its existence.  This prescription does not pertain to DTLS (in
-   any DTLS version); it pertains to TLS only.
+   Both versions have several extension points, so items like new
+   cryptographic algorithms, new supported groups (formerly "named
+   curves"), etc., can be added without defining a new protocol.  This
+   document specifies that outside of urgent security fixes, no new
+   features will be approved for TLS 1.2.  This prescription does not
+   pertain to DTLS (in any DTLS version); it pertains to TLS only.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-rsalz-uta-require-tls13/.
+   https://datatracker.ietf.org/doc/draft-ietf-tls-tls12-frozen/.
 
    Discussion of this document takes place on the Transport Layer
    Security Working Group mailing list (mailto:tls@ietf.org), which is
@@ -36,7 +39,7 @@ About This Document
    at https://www.ietf.org/mailman/listinfo/tls/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/richsalz/tls12-frozen.
+   https://github.com/tlswg/tls12-frozen.
 
 Status of This Memo
 
@@ -53,11 +56,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 June 2024.
+   This Internet-Draft will expire on 26 September 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -74,12 +77,11 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Implications for post-quantum cryptography
-   4.  TLS Use by Other Protocols
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -101,12 +103,12 @@ Table of Contents
        problematic finite-field Diffie-Hellman group negotiation.  This
        deficiency may be addressed through proper configuration;
        however, experience shows that configuration mistakes are common,
-       especially when deploying cryptography.  See Section 5 for
+       especially when deploying cryptography.  See Section 4 for
        elaboration.
 
-   3.  The original protocol, as-is, does not provide security [RENEG1],
-       [RENEG2], [TRIPLESHAKE].  Rather, some extensions are required to
-       provide security.
+   3.  The original protocol, as-is, does not provide security due to
+       the "Renegotiation" class of attacks (see Section 4).  Rather,
+       some extensions are required to provide security.
 
    In contrast, TLS 1.3 [TLS13] is also in widespread use and fixes most
    known deficiencies with TLS 1.2, such as encrypting more of the
@@ -114,10 +116,12 @@ Table of Contents
    cryptographic primitives considered dangerous.  Importantly, TLS 1.3
    enjoys robust security proofs and provides excellent security as-is.
 
-   This document specifies that, since TLS 1.3 use is widespread, new
-   protocols must require and assume its existence.  This prescription
-   does not pertain to DTLS (in any DTLS version); it pertains to TLS
-   only.
+   Both versions have several extension points, so items like new
+   cryptographic algorithms, new supported groups (formerly "named
+   curves"), etc., can be added without defining a new protocol.  This
+   document specifies that outside of urgent security fixes, no new
+   features will be approved for TLS 1.2.  This prescription does not
+   pertain to DTLS (in any DTLS version); it pertains to TLS only.
 
 2.  Conventions and Definitions
 
@@ -129,8 +133,9 @@ Table of Contents
 
 3.  Implications for post-quantum cryptography
 
-   Quantum computers, once available, will have a huge impact on TLS.
-   In 2016, the US National Institute of Standards and Technology
+   Cryptographically relevant quantum computers, once available, will
+   have a huge impact on RSA, FFDH, and ECC which are currently used in
+   TLS.  In 2016, the US National Institute of Standards and Technology
    started a multi-year effort to standardize algorithms that will be
    "safe" once quantum computers are feasible [PQC].  First IETF
    discussions happened around the same time [CFRGSLIDES].
@@ -143,24 +148,10 @@ Table of Contents
    transition from classic to a post-quantum world.
 
    For TLS it is important to note that the focus of these efforts is
-   TLS 1.3 or later.  TLS 1.2 WILL NOT be supported (see Section 6).
-   This is one more reason for new protocols to default to TLS 1.3,
-   where post-quantum cryptography is expected to be supported.
+   TLS 1.3 or later.  Bluntly, post-quantum cryptography for TLS 1.2
+   WILL NOT be supported (see Section 5).
 
-4.  TLS Use by Other Protocols
-
-   Any new protocol that uses TLS MUST specify as its default TLS 1.3
-   (or a higher TLS version, when one becomes stadardized).  For
-   example, QUIC [QUICTLS] requires TLS 1.3 and specifies that endpoints
-   MUST terminate the connection if an older version is used.
-
-   If deployment considerations are a concern, the protocol MAY specify
-   TLS 1.2 as an additional, non-default option.  As a counter example,
-   the Usage Profile for DNS over TLS [DNSTLS] specifies TLS 1.2 as the
-   default, while also allowing TLS 1.3.  For newer specifications that
-   choose to support TLS 1.2, those preferences are to be reversed.
-
-5.  Security Considerations
+4.  Security Considerations
 
    TLS 1.2 was specified with several cryptographic primitives and
    design choices that have historically hindered its security.  The
@@ -208,22 +199,21 @@ Table of Contents
    attacks that TLS 1.3 is immune to: BEAST [BEAST], Logjam [WEAKDH],
    FREAK [FREAK], and SLOTH [SLOTH].
 
-6.  IANA Considerations
+5.  IANA Considerations
 
-   This document makes no requests to IANA.
+   IANA will stop accepting registrations for any TLS parameters
+   [TLS13REG] except for the following:
 
-7.  References
+   *  TLS Exporter Labels
 
-7.1.  Normative References
+   *  TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs
 
-   [DNSTLS]   Dickinson, S., Gillmor, D., and T. Reddy, "Usage Profiles
-              for DNS over TLS and DNS over DTLS", RFC 8310,
-              DOI 10.17487/RFC8310, March 2018,
-              <https://www.rfc-editor.org/rfc/rfc8310>.
+   Entries in any other TLS protocol registry should have an indication
+   like "For TLS 1.3 or later" in their entry.
 
-   [QUICTLS]  Thomson, M., Ed. and S. Turner, Ed., "Using TLS to Secure
-              QUIC", RFC 9001, DOI 10.17487/RFC9001, May 2021,
-              <https://www.rfc-editor.org/rfc/rfc9001>.
+6.  References
+
+6.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -258,7 +248,11 @@ Table of Contents
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
 
-7.2.  Informative References
+   [TLS13REG] Salowey, J. and S. Turner, "IANA Registry Updates for TLS
+              and DTLS", RFC 8447, DOI 10.17487/RFC8447, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8447>.
+
+6.2.  Informative References
 
    [BEAST]    Duong, T. and J. Rizzo, "Here come the xor ninjas", n.d.,
               <http://www.hpcc.ecs.soton.ac.uk/dan/talks/bullrun/
@@ -292,7 +286,7 @@ Table of Contents
               libraries", n.d., <https://nds.rub.de/media/nds/
               veroeffentlichungen/2016/10/19/tls-attacker-ccs16.pdf>.
 
-   [PQC]      "Post=Quantum Cryptography", January 2017,
+   [PQC]      "Post-Quantum Cryptography", January 2017,
               <https://csrc.nist.gov/projects/post-quantum-
               cryptography>.
 
