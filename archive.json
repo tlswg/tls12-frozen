@@ -1,0 +1,560 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-03-05T00:57:05.116860+00:00",
+  "repo": "richsalz/tls12-frozen",
+  "labels": [
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    },
+    {
+      "name": "uta",
+      "description": "For the UTA WG draft",
+      "color": "f9d0c4"
+    },
+    {
+      "name": "tls",
+      "description": "For the TLS WG draft",
+      "color": "006b75"
+    }
+  ],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOJeA3Os5sqxb5",
+      "title": "TLS 1.3 ... or its successor",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/3",
+      "state": "CLOSED",
+      "author": "martinthomson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The draft currently mandates support for TLS 1.3 for new protocols.  This might be bad at the point that we decide to deprecate TLS 1.3.\r\n\r\nMaybe this can say TLS 1.3 *or a higher TLS version*.",
+      "createdAt": "2023-07-26T20:57:07Z",
+      "updatedAt": "2023-07-30T14:23:53Z",
+      "closedAt": "2023-07-30T14:23:53Z",
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOJeA3Os5srmCC",
+      "title": "split into two drafts",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/4",
+      "state": "CLOSED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The \"other protocols\" section should be its own draft, and sent to UTA",
+      "createdAt": "2023-07-26T23:46:02Z",
+      "updatedAt": "2023-10-06T12:58:38Z",
+      "closedAt": "2023-10-06T12:58:38Z",
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Done, closing.",
+          "createdAt": "2023-10-06T12:58:38Z",
+          "updatedAt": "2023-10-06T12:58:38Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOJeA3Os5srmHt",
+      "title": "\"frozen\" is not a great word",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/5",
+      "state": "CLOSED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Not getting new features is more accurate.",
+      "createdAt": "2023-07-26T23:46:20Z",
+      "updatedAt": "2023-07-30T14:23:35Z",
+      "closedAt": "2023-07-30T14:23:35Z",
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOJeA3Os5tgbgF",
+      "title": "Clarify this is just for TLS 1.2 proper, not DTLS 1.2",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/7",
+      "state": "CLOSED",
+      "author": "JonathanLennox",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Given the slow progress of implementations of DTLS 1.3, I think this draft needs to be clear that this feature freeze applies only to TLS 1.2 proper, not DTLS 1.2.\r\n\r\nFor example, I would be very sad if any new DTLS-SRTP protection profiles could only be negotiated with DTLS 1.3.\r\n\r\nThis may have implications for the IANA instructions section, for registries that are shared between the two protocols.",
+      "createdAt": "2023-08-04T19:06:59Z",
+      "updatedAt": "2023-10-06T12:59:45Z",
+      "closedAt": "2023-10-06T12:59:44Z",
+      "comments": [
+        {
+          "author": "JonathanLennox",
+          "authorAssociation": "NONE",
+          "body": "Perhaps more seriously (since I don't know of any proposed new DTLS-SRTP protection profiles at this time):  if DTLS 1.3 stacks don't reach maturity before PQ KEMs are ready for production, we're going to need PQ KEMs for DTLS 1.2 if we're going to protect WebRTC traffic from harvest-now-decrypt-later attacks.",
+          "createdAt": "2023-08-07T17:06:57Z",
+          "updatedAt": "2023-08-07T17:06:57Z"
+        },
+        {
+          "author": "sayrer",
+          "authorAssociation": "NONE",
+          "body": "> ...we're going to need PQ KEMs for DTLS 1.2...\r\n\r\nIt doesn't look like that work is being done for (D)TLS 1.2.\r\n\r\nThe most recent update I know of is here:\r\nhttps://www.ietf.org/archive/id/draft-ar-pquip-pqc-engineers-02.html\r\n\r\nfrom this WG:\r\nhttps://datatracker.ietf.org/wg/pquip/about/\r\n",
+          "createdAt": "2023-08-07T17:32:36Z",
+          "updatedAt": "2023-08-07T17:32:36Z"
+        },
+        {
+          "author": "JonathanLennox",
+          "authorAssociation": "NONE",
+          "body": "Well, hopefully then the need for PQ support will incentivize stack developers to work on DTLS 1.3, I guess...\r\n\r\nNonetheless it seems to me like DTLS 1.3 implementation and deployment definitely haven't reached the maturity point that TLS 1.3 has, to warrant declaring DTLS 1.2 frozen, unfortunately.",
+          "createdAt": "2023-08-07T18:24:15Z",
+          "updatedAt": "2023-08-07T18:24:15Z"
+        },
+        {
+          "author": "sayrer",
+          "authorAssociation": "NONE",
+          "body": "There's an active discussion on the TLS list (pardon me for linking to myself...):\r\nhttps://mailarchive.ietf.org/arch/msg/tls/PvBUJFCOyQZ1cD6StRJeda6pB_U/\r\n\r\nYou should probably contribute there if you feel strongly.",
+          "createdAt": "2023-08-07T18:53:23Z",
+          "updatedAt": "2023-08-07T18:53:23Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Both drafts now say \"this is only about TLS, not DTLS.\"  Thanks for the feedback.  Closing.",
+          "createdAt": "2023-10-06T12:59:44Z",
+          "updatedAt": "2023-10-06T12:59:44Z"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOJeA3Os5zC7eV",
+      "title": "Since this modified RFC 9325 ...",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/9",
+      "state": "OPEN",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "uta"
+      ],
+      "body": "From @stpeter email to the UTA WG: RFC 9325 (BCP195) says that new protocols must support TLS 1.2 and TLS 1.3. Since this document says MUST 1.3 and MAY 1.2, two things need to happen:\r\n\r\n- This must be marked as updating 9325 and explain what the changes are;\r\n- This must be part of BCP 195 and not informational.\r\n\r\nMore detaikls in Peter's email at https://mailarchive.ietf.org/arch/msg/uta/jkj0nSxHybzX0KrDwYxgfYvxfAg/",
+      "createdAt": "2023-10-06T13:06:14Z",
+      "updatedAt": "2023-11-04T09:45:17Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "sayrer",
+          "authorAssociation": "NONE",
+          "body": "He's right about the markings. But, also, do it!",
+          "createdAt": "2023-11-04T00:13:10Z",
+          "updatedAt": "2023-11-04T00:13:10Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "@sayrer we WILL do it, just opened this issue to make sure not to forget it :)",
+          "createdAt": "2023-11-04T09:45:17Z",
+          "updatedAt": "2023-11-04T09:45:17Z"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOJeA3Os547N3v",
+      "title": "Too many IANA registries frozen?",
+      "url": "https://github.com/richsalz/tls12-frozen/issues/10",
+      "state": "OPEN",
+      "author": "davidben",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This may just be a reading comprehension failure on my end. Section 5 says:\r\n\r\n>  IANA will stop accepting registrations for any TLS parameters [[TLS13REG](https://www.ietf.org/archive/id/draft-rsalz-tls-tls12-frozen-02.html#TLS13REG)] except for the following:\r\n>\r\n> * TLS Exporter Labels\r\n>\r\n> * TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs\r\n\r\nBut several more registries mentioned in RFC 8447 will still be alive and well after TLS 1.2:\r\n\r\n* TLS ExtensionType Values\r\n* TLS Cipher Suites Registry\r\n* TLS Supported Groups\r\n* TLS Alerts Registry\r\n* TLS Certificate Types\r\n\r\nThough I'm also slightly unclear on which registries it means because 8447 just adds to or tweaks those registries, rather than defining them. Am I just misreading this? Maybe it'd be easier to instead explicitly write the registries we mean to close.",
+      "createdAt": "2023-12-06T15:18:16Z",
+      "updatedAt": "2023-12-22T14:35:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "The intent is to say: If you want to add new values for TLS 1.2 IANA will only allow them for those two specific registries.\r\n\r\nThere are doubtless better ways to say that.",
+          "createdAt": "2023-12-06T15:49:17Z",
+          "updatedAt": "2023-12-06T15:49:17Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "body": "Ah. It read to me like you wanted to close new registrations altogether, since TLS 1.2 and 1.3 share many of the same registries. Maybe we want to phrase it as saying that new registrations are allowed but they need to have some footnote? Or maybe we just require it in prose in the corresponding document? Cipher suite registrations are already partitioned by 1.2 and 1.3 but we don't reflect it in the registry.",
+          "createdAt": "2023-12-06T16:04:03Z",
+          "updatedAt": "2023-12-06T16:04:03Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "The 8447bis document adds the \u201cNote\u201d column that this document suggests be used.\r\n",
+          "createdAt": "2023-12-06T16:22:35Z",
+          "updatedAt": "2023-12-06T16:22:35Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "@davidben please see #13 and approve or suggest changes.",
+          "createdAt": "2023-12-22T14:35:41Z",
+          "updatedAt": "2023-12-22T14:35:41Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOJeA3Os5PyZHd",
+      "title": "Edit suggestions for Rich's draft.",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/1",
+      "state": "MERGED",
+      "author": "nimia",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Hi Rich, please let me know what you think? thanks :-)",
+      "createdAt": "2023-05-04T14:55:45Z",
+      "updatedAt": "2023-05-11T14:47:45Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "3b1bf8af74d58f19ca8915a7e74062b1d2ff5719",
+      "headRepository": "nimia/tls12-frozen",
+      "headRefName": "main",
+      "headRefOid": "e15ade60e3a217fbc1e1d610175c460ad84cb8e6",
+      "closedAt": "2023-05-11T14:47:44Z",
+      "mergedAt": "2023-05-11T14:47:44Z",
+      "mergedBy": "nimia",
+      "mergeCommit": {
+        "oid": "38c32223d56ca7a1331693363e5f88b1ca7762c2"
+      },
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "I like basically all these changes.  Or my disagreements are nit-picking.  Wanna be a co-author?",
+          "createdAt": "2023-05-04T16:32:01Z",
+          "updatedAt": "2023-05-04T16:32:01Z"
+        },
+        {
+          "author": "nimia",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Haha sure, thanks! :-)",
+          "createdAt": "2023-05-04T16:37:25Z",
+          "updatedAt": "2023-05-04T16:37:25Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJeA3Os5UQCnS",
+          "commit": {
+            "abbreviatedOid": "e15ade6"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-05-04T16:38:11Z",
+          "updatedAt": "2023-05-04T16:38:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOJeA3Os5QTd1q",
+      "title": "Reasons for freezing, Some Security Considerations",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/2",
+      "state": "CLOSED",
+      "author": "nimia",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-05-11T15:17:51Z",
+      "updatedAt": "2023-05-15T15:20:15Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "38c32223d56ca7a1331693363e5f88b1ca7762c2",
+      "headRepository": "richsalz/tls12-frozen",
+      "headRefName": "nimrod_todo",
+      "headRefOid": "147c2b398bf8d3851b288f3504a8db30d8072238",
+      "closedAt": "2023-05-15T15:20:15Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJeA3Os5U0VMJ",
+          "commit": {
+            "abbreviatedOid": "a7e43d0"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-11T16:25:05Z",
+          "updatedAt": "2023-05-11T16:25:06Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "I wonder if we really need all this justification. Given the list above it seems redundant. I know that I tend to terse, write-once, style.",
+              "createdAt": "2023-05-11T16:25:05Z",
+              "updatedAt": "2023-05-11T16:25:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJeA3Os5VCvmJ",
+          "commit": {
+            "abbreviatedOid": "d0f40ee"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Consider renaming the bulk of the security considerations 'deployment advice for TLS 1.2'  But either way, approved.",
+          "createdAt": "2023-05-15T15:07:04Z",
+          "updatedAt": "2023-05-15T15:07:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOJeA3Os5WjFMf",
+      "title": "\"Feature Freeze\" instead of Frozen.",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/6",
+      "state": "MERGED",
+      "author": "nimia",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Also, TLS 1.3, or a later version.\r\nThis attempts to solve #5 and #3 .",
+      "createdAt": "2023-07-27T13:47:47Z",
+      "updatedAt": "2023-07-28T14:42:40Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "1ef98dfc042284facffc45fce4cffccfd229bf8c",
+      "headRepository": "richsalz/tls12-frozen",
+      "headRefName": "feature_freeze",
+      "headRefOid": "1870440116b24193f14913ab5b3c90aef9c6f44d",
+      "closedAt": "2023-07-28T14:32:24Z",
+      "mergedAt": "2023-07-28T14:32:24Z",
+      "mergedBy": "nimia",
+      "mergeCommit": {
+        "oid": "db75bd554f149a156d3eb5bd2a62e0c48ac0af8a"
+      },
+      "comments": [
+        {
+          "author": "nimia",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hey, what's \"urgent\"? ",
+          "createdAt": "2023-07-28T14:32:45Z",
+          "updatedAt": "2023-07-28T14:32:45Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Your text said \"urgent security fixes\". Maybe just \"security fixes\". Let's see what the WG thinks.",
+          "createdAt": "2023-07-28T14:42:40Z",
+          "updatedAt": "2023-07-28T14:42:40Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJeA3Os5cZvxJ",
+          "commit": {
+            "abbreviatedOid": "1870440"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "I wonder if we want \"urgent\". Probably yes.  Looks good, merge!",
+          "createdAt": "2023-07-27T16:19:07Z",
+          "updatedAt": "2023-07-27T16:19:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOJeA3Os5X0l_x",
+      "title": "Split into two drafts; Not covering DTLS",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/8",
+      "state": "MERGED",
+      "author": "nimia",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-08-13T14:57:00Z",
+      "updatedAt": "2023-08-14T13:25:07Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "cd2ccf0f869bc5c52fc25770e7152f2fe0639bdd",
+      "headRepository": "richsalz/tls12-frozen",
+      "headRefName": "split_dtls",
+      "headRefOid": "abca0dab7e57dd273035b21cbe7c69978b81a710",
+      "closedAt": "2023-08-14T13:25:06Z",
+      "mergedAt": "2023-08-14T13:25:06Z",
+      "mergedBy": "nimia",
+      "mergeCommit": {
+        "oid": "4d864fa126b2a140640c08aff8a946632b14f3de"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJeA3Os5d7e1v",
+          "commit": {
+            "abbreviatedOid": "d91ad02"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Some suggestions I'd like to see, but approved.",
+          "createdAt": "2023-08-13T18:25:37Z",
+          "updatedAt": "2023-08-13T18:26:19Z",
+          "comments": [
+            {
+              "originalPosition": 159,
+              "body": "Perhaps add \"This can be addressed by proper configuration.\"",
+              "createdAt": "2023-08-13T18:25:37Z",
+              "updatedAt": "2023-08-13T18:26:19Z"
+            },
+            {
+              "originalPosition": 153,
+              "body": "Perhaps add \"This is a protocol issue and cannot be addressed by configuration.\"",
+              "createdAt": "2023-08-13T18:25:59Z",
+              "updatedAt": "2023-08-13T18:26:19Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOJeA3Os5hVBA5",
+      "title": "Update draft-rsalz-uta-require-tls13.md",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/11",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-12-06T16:56:29Z",
+      "updatedAt": "2023-12-06T17:03:43Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "a579e6000a0d4d13e70f67993848b63b713bbe17",
+      "headRepository": "OR13/tls12-frozen",
+      "headRefName": "patch-1",
+      "headRefOid": "c26be6c4492429cccdbab9400c0716896e7b9f8f",
+      "closedAt": "2023-12-06T17:03:42Z",
+      "mergedAt": "2023-12-06T17:03:42Z",
+      "mergedBy": "richsalz",
+      "mergeCommit": {
+        "oid": "a036b9b0d7e18381c269b4e30dd50a2842586c7f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOJeA3Os5hi9l2",
+      "title": "Mattson edit; remove unused references",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/12",
+      "state": "MERGED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Merge just before submitting as a WG doc.",
+      "createdAt": "2023-12-08T17:45:59Z",
+      "updatedAt": "2023-12-22T14:08:48Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "a036b9b0d7e18381c269b4e30dd50a2842586c7f",
+      "headRepository": "richsalz/tls12-frozen",
+      "headRefName": "mattson-edit",
+      "headRefOid": "37c78a9ffe71f1dd0b8bd62d15f72294c86c5353",
+      "closedAt": "2023-12-22T14:08:38Z",
+      "mergedAt": "2023-12-22T14:08:38Z",
+      "mergedBy": "richsalz",
+      "mergeCommit": {
+        "oid": "b369f04d2505fccd1af264ecfd5d09010eb79844"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJeA3Os5qzM0g",
+          "commit": {
+            "abbreviatedOid": "37c78a9"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-12-20T23:10:06Z",
+          "updatedAt": "2023-12-20T23:10:06Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOJeA3Os5iqAOD",
+      "title": "Clarify IANA considerations",
+      "url": "https://github.com/richsalz/tls12-frozen/pull/13",
+      "state": "OPEN",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "richsalz"
+      ],
+      "labels": [],
+      "body": "David Benjamin pointed out the wording in IANA considerations is misleading.\r\n\r\nFixes: #10",
+      "createdAt": "2023-12-22T14:35:04Z",
+      "updatedAt": "2024-01-01T18:35:49Z",
+      "baseRepository": "richsalz/tls12-frozen",
+      "baseRefName": "main",
+      "baseRefOid": "b369f04d2505fccd1af264ecfd5d09010eb79844",
+      "headRepository": "richsalz/tls12-frozen",
+      "headRefName": "fix-10",
+      "headRefOid": "7c6ba77b1589fb5dad05809d5139fd5e15abc336",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJeA3Os5rR4jz",
+          "commit": {
+            "abbreviatedOid": "7c6ba77"
+          },
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-01T18:35:49Z",
+          "updatedAt": "2024-01-01T18:35:49Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Does this mean that new TLS/DTLS-agnostic extensions should be defined TLS 1.3+ and DTLS 1.2+? That seems a bit weird. Or are we saying that TLS/DTLS-agnostic extensions should be (D)TLS 1.3+ by way of \"For TLS 1.3 or later\", while DTLS-only extensions are allowed to target DTLS 1.2 and don't need that note?",
+              "createdAt": "2024-01-01T18:35:49Z",
+              "updatedAt": "2024-01-01T18:35:50Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

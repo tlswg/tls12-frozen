@@ -1,0 +1,338 @@
+
+
+
+
+Transport Layer Security                                         R. Salz
+Internet-Draft                                       Akamai Technologies
+Intended status: Informational                                 N. Aviram
+Expires: 26 September 2024                                 25 March 2024
+
+
+                      TLS 1.2 is in Feature Freeze
+                   draft-ietf-tls-tls12-frozen-latest
+
+Abstract
+
+   TLS 1.2 is in widespread use and can be configured such that it
+   provides good security properties.  TLS 1.3 is also in widespread use
+   and fixes some known deficiencies with TLS 1.2, such as removing
+   error-prone cryptographic primitives and encrypting more of the
+   traffic so that it is not readable by outsiders.
+
+   Both versions have several extension points, so items like new
+   cryptographic algorithms, new supported groups (formerly "named
+   curves"), etc., can be added without defining a new protocol.  This
+   document specifies that outside of urgent security fixes, no new
+   features will be approved for TLS 1.2.  This prescription does not
+   pertain to DTLS (in any DTLS version); it pertains to TLS only.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-tls-tls12-frozen/.
+
+   Discussion of this document takes place on the Transport Layer
+   Security Working Group mailing list (mailto:tls@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/tls/.  Subscribe
+   at https://www.ietf.org/mailman/listinfo/tls/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/tlswg/tls12-frozen.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 26 September 2024.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Implications for post-quantum cryptography
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   TLS 1.2 [TLS12] is in widespread use and can be configured such that
+   it provides good security properties.  However, this protocol version
+   suffers from several deficiencies:
+
+   1.  While application layer traffic is always encrypted, most of the
+       handshake messages are not encrypted.  Therefore, the privacy
+       provided is suboptimal.  This is a protocol issue that cannot be
+       addressed by configuration.
+
+   2.  The list of cryptographic primitives specified for the protocol,
+       both in-use primitives and deprecated ones, includes several
+       primitives that were a source for vulnerabilities throughout the
+       years, such as RSA key exchange, CBC cipher suites, and
+       problematic finite-field Diffie-Hellman group negotiation.  This
+       deficiency may be addressed through proper configuration;
+       however, experience shows that configuration mistakes are common,
+       especially when deploying cryptography.  See Section 4 for
+       elaboration.
+
+   3.  The original protocol, as-is, does not provide security due to
+       the "Renegotiation" class of attacks (see Section 4).  Rather,
+       some extensions are required to provide security.
+
+   In contrast, TLS 1.3 [TLS13] is also in widespread use and fixes most
+   known deficiencies with TLS 1.2, such as encrypting more of the
+   traffic so that it is not readable by outsiders and removing most
+   cryptographic primitives considered dangerous.  Importantly, TLS 1.3
+   enjoys robust security proofs and provides excellent security as-is.
+
+   Both versions have several extension points, so items like new
+   cryptographic algorithms, new supported groups (formerly "named
+   curves"), etc., can be added without defining a new protocol.  This
+   document specifies that outside of urgent security fixes, no new
+   features will be approved for TLS 1.2.  This prescription does not
+   pertain to DTLS (in any DTLS version); it pertains to TLS only.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Implications for post-quantum cryptography
+
+   Cryptographically relevant quantum computers, once available, will
+   have a huge impact on RSA, FFDH, and ECC which are currently used in
+   TLS.  In 2016, the US National Institute of Standards and Technology
+   started a multi-year effort to standardize algorithms that will be
+   "safe" once quantum computers are feasible [PQC].  First IETF
+   discussions happened around the same time [CFRGSLIDES].
+
+   While the industry is waiting for NIST to finish standardization, the
+   IETF has several efforts underway.  A working group was formed in
+   early 2013 to work on use of PQC in IETF protocols, [PQUIPWG].
+   Several other working groups, including TLS [TLSWG], are working on
+   drafts to support hybrid algorithms and identifiers, for use during a
+   transition from classic to a post-quantum world.
+
+   For TLS it is important to note that the focus of these efforts is
+   TLS 1.3 or later.  Bluntly, post-quantum cryptography for TLS 1.2
+   WILL NOT be supported (see Section 5).
+
+4.  Security Considerations
+
+   TLS 1.2 was specified with several cryptographic primitives and
+   design choices that have historically hindered its security.  The
+   purpose of this section is to briefly survey several such prominent
+   problems that have affected the protocol.  It should be noted,
+   however, that TLS 1.2 can be configured securely; it is merely much
+   more difficult to configure it securely as opposed to using its
+   modern successor, TLS 1.3.  See [RFC9325] for a more thorough guide
+   on the secure deployment of TLS 1.2.
+
+   Firstly, the TLS 1.2 protocol, without any extension points, is
+   vulnerable to the renegotiation attack and the Triple Handshake
+   attack.  Broadly, these attacks exploit the protocol's support for
+   renegotiation in order to inject a prefix chosen by the attacker into
+   the plaintext stream.  This is usually a devastating threat in
+   practice, that allows e.g. obtaining secret cookies in a web setting.
+   Refer to [RENEG1], [RENEG2], [TRIPLESHAKE] for elaboration.  In light
+   of the above problems, [RFC5746] specifies an extension that prevents
+   this category of attacks.  To securely deploy TLS 1.2, either
+   renegotiation must be disabled entirely, or this extension must be
+   present.  Additionally, clients must not allow servers to renegotiate
+   the certificate during a connection.
+
+   Secondly, the original key exchange methods specified for the
+   protocol, namely RSA key exchange and finite field Diffie-Hellman,
+   suffer from several weaknesses.  As before, to securely deploy the
+   protocol, these key exchange methods must be disabled.  Refer to
+   draft-obsolete-kex for elaboration (TODO I guess we will anyway wait
+   for WGLC for draft-obsolete-kex, so no sense to temporarily refer to
+   the draft.)
+
+   Thirdly, symmetric ciphers which were widely-used in the protocol,
+   namely RC4 and CBC cipher suites, suffer from several weaknesses.
+   RC4 suffers from exploitable biases in its key stream; see [RFC7465].
+   CBC cipher suites have been a source of vulnerabilities throughout
+   the years.  A straightforward implementation of these cipher suites
+   inherently suffers from the Lucky13 timing attack [LUCKY13].  The
+   first attempt to implement the cipher suites in constant time
+   introduced an even more severe vulnerability [LUCKY13FIX].  There
+   have been further similar vulnerabilities throughout the years
+   exploiting CBC cipher suites; refer to e.g.  [CBCSCANNING] for an
+   example and a survey of similar works.
+
+   And lastly, historically the protocol was affected by several other
+   attacks that TLS 1.3 is immune to: BEAST [BEAST], Logjam [WEAKDH],
+   FREAK [FREAK], and SLOTH [SLOTH].
+
+5.  IANA Considerations
+
+   IANA will stop accepting registrations for any TLS parameters
+   [TLS13REG] except for the following:
+
+   *  TLS Exporter Labels
+
+   *  TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs
+
+   Entries in any other TLS protocol registry should have an indication
+   like "For TLS 1.3 or later" in their entry.
+
+6.  References
+
+6.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC5746]  Rescorla, E., Ray, M., Dispensa, S., and N. Oskov,
+              "Transport Layer Security (TLS) Renegotiation Indication
+              Extension", RFC 5746, DOI 10.17487/RFC5746, February 2010,
+              <https://www.rfc-editor.org/rfc/rfc5746>.
+
+   [RFC7465]  Popov, A., "Prohibiting RC4 Cipher Suites", RFC 7465,
+              DOI 10.17487/RFC7465, February 2015,
+              <https://www.rfc-editor.org/rfc/rfc7465>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9325]  Sheffer, Y., Saint-Andre, P., and T. Fossati,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
+              2022, <https://www.rfc-editor.org/rfc/rfc9325>.
+
+   [TLS12]    Dierks, T. and E. Rescorla, "The Transport Layer Security
+              (TLS) Protocol Version 1.2", RFC 5246,
+              DOI 10.17487/RFC5246, August 2008,
+              <https://www.rfc-editor.org/rfc/rfc5246>.
+
+   [TLS13]    Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8446>.
+
+   [TLS13REG] Salowey, J. and S. Turner, "IANA Registry Updates for TLS
+              and DTLS", RFC 8447, DOI 10.17487/RFC8447, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8447>.
+
+6.2.  Informative References
+
+   [BEAST]    Duong, T. and J. Rizzo, "Here come the xor ninjas", n.d.,
+              <http://www.hpcc.ecs.soton.ac.uk/dan/talks/bullrun/
+              Beast.pdf>.
+
+   [CBCSCANNING]
+              Merget, R., Somorovsky, J., Aviram, N., Young, C.,
+              Fliegenschmidt, J., Schwenk, J., and Y. Shavitt, "Scalable
+              Scanning and Automatic Classification of TLS Padding
+              Oracle Vulnerabilities", n.d.,
+              <https://www.usenix.org/system/files/sec19-merget.pdf>.
+
+   [CFRGSLIDES]
+              McGrew, D., "Post Quantum Secure Cryptography Discussion",
+              n.d., <https://www.ietf.org/proceedings/95/slides/slides-
+              95-cfrg-4.pdf>.
+
+   [FREAK]    Beurdouche, B., Bhargavan, K., Delignat-Lavaud, A.,
+              Fournet, C., Kohlweiss, M., Pironti, A., Strub, P.-Y., and
+              J. K. Zinzindohoue, "A messy state of the union: Taming
+              the composite state machines of TLS", n.d.,
+              <https://inria.hal.science/hal-01114250/file/messy-state-
+              of-the-union-oakland15.pdf>.
+
+   [LUCKY13]  Al Fardan, N. J. and K. G. Paterson, "Lucky Thirteen:
+              Breaking the TLS and DTLS record protocols", n.d.,
+              <http://www.isg.rhul.ac.uk/tls/TLStiming.pdf>.
+
+   [LUCKY13FIX]
+              Somorovsky, J., "Systematic fuzzing and testing of TLS
+              libraries", n.d., <https://nds.rub.de/media/nds/
+              veroeffentlichungen/2016/10/19/tls-attacker-ccs16.pdf>.
+
+   [PQC]      "Post-Quantum Cryptography", January 2017,
+              <https://csrc.nist.gov/projects/post-quantum-
+              cryptography>.
+
+   [PQUIPWG]  "Post-Quantum Use in Protocols", n.d.,
+              <https://datatracker.ietf.org/wg/pquip/about/>.
+
+   [RENEG1]   Rescorla, E., "Understanding the TLS Renegotiation
+              Attack", n.d.,
+              <https://web.archive.org/web/20091231034700/
+              http://www.educatedguesswork.org/2009/11/
+              understanding_the_tls_renegoti.html>.
+
+   [RENEG2]   Ray, M., "Authentication Gap in TLS Renegotiation", n.d.,
+              <https://web.archive.org/web/20091228061844/
+              http://extendedsubset.com/?p=8>.
+
+   [SLOTH]    Bhargavan, K. and G. Leurent, "Transcript collision
+              attacks: Breaking authentication in TLS, IKE, and SSH",
+              n.d., <https://inria.hal.science/hal-01244855/file/
+              SLOTH_NDSS16.pdf>.
+
+   [TLSWG]    "Transport Layer Security", n.d.,
+              <https://datatracker.ietf.org/wg/tls/about/>.
+
+   [TRIPLESHAKE]
+              "Triple Handshakes Considered Harmful Breaking and Fixing
+              Authentication over TLS", n.d.,
+              <https://mitls.org/pages/attacks/3SHAKE>.
+
+   [WEAKDH]   Adrian, D., Bhargavan, K., Durumeric, Z., Gaudry, P.,
+              Green, M., Halderman, J. A., Heninger, N., Springall, D.,
+              Thomé, E., Valenta, L., and B. VanderSloot, "Imperfect
+              forward secrecy: How Diffie-Hellman fails in practice",
+              n.d.,
+              <https://dl.acm.org/doi/pdf/10.1145/2810103.2813707>.
+
+Acknowledgments
+
+   None yet.
+
+Authors' Addresses
+
+   Rich Salz
+   Akamai Technologies
+   Email: rsalz@akamai.com
+
+
+   Nimrod Aviram
+   Email: nimrod.aviram@gmail.com
