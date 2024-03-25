@@ -38,7 +38,7 @@ informative:
   PQC:
     target: https://csrc.nist.gov/projects/post-quantum-cryptography
     date: January, 2017
-    title: Post=Quantum Cryptography
+    title: Post-Quantum Cryptography
   CFRGSLIDES:
     target: https://www.ietf.org/proceedings/95/slides/slides-95-cfrg-4.pdf
     title: Post Quantum Secure Cryptography Discussion
