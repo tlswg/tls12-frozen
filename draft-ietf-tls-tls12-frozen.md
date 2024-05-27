@@ -84,7 +84,7 @@ informative:
       - name: Nimrod Aviram
       - name: Craig Young
       - name: Janis Fliegenschmidt
-      - name: JÃ¶rg Schwenk
+      - name: Jörg Schwenk
       - name: Yuval Shavitt
   BEAST:
     title: "Here come the xor ninjas"
@@ -104,7 +104,7 @@ informative:
       - ins: J. A.Halderman
       - ins: N. Heninger
       - ins: D. Springall
-      - ins: E. ThomÃ©
+      - ins: E. Thomé
       - ins: L. Valenta
       - ins: B. VanderSloot
   FREAK:
@@ -114,7 +114,7 @@ informative:
       - name: Benjamin Beurdouche
       - name: Karthikeyan Bhargavan
       - name: Antoine Delignat-Lavaud
-      - name: CÃ©dric Fournet
+      - name: Cédric Fournet
       - name: Markulf Kohlweiss
       - name: Alfredo Pironti
       - name: Pierre-Yves Strub
@@ -124,7 +124,7 @@ informative:
     target: https://inria.hal.science/hal-01244855/file/SLOTH_NDSS16.pdf
     author:
       - name: Karthikeyan Bhargavan
-      - name: GaÃ«tan Leurent
+      - name: Gaëtan Leurent
 
 --- abstract
 
@@ -194,7 +194,7 @@ around the same time {{CFRGSLIDES}}.
 
 While the industry is waiting for NIST to finish standardization, the
 IETF has several efforts underway.
-A working group was formed in early 2023 to work on use of PQC in IETF protocols,
+A working group was formed in early 2013 to work on use of PQC in IETF protocols,
 {{PQUIPWG}}.
 Several other working groups, including TLS {{TLSWG}},
 are working on
