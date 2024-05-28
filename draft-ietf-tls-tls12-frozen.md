@@ -194,7 +194,7 @@ around the same time {{CFRGSLIDES}}.
 
 While the industry is waiting for NIST to finish standardization, the
 IETF has several efforts underway.
-A working group was formed in early 2013 to work on use of PQC in IETF protocols,
+A working group was formed in early 2023 to work on use of PQC in IETF protocols,
 {{PQUIPWG}}.
 Several other working groups, including TLS {{TLSWG}},
 are working on
