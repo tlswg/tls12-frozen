@@ -70,7 +70,7 @@ Use of TLS 1.3 is growing and fixes some known deficiencies in TLS 1.2.
 This document specifies that outside of
 urgent security fixes, new TLS Exporter Labels, or new
 Application-Layer Protocol Negotiation (ALPN) Protocol IDs,
-no new features will be approved for TLS 1.2.
+no changes will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
 TLS only.
 
@@ -88,7 +88,7 @@ Both versions have several extension points, so items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
 urgent security fixes, and the exceptions listed in {{iana}},
-no new features will be approved for TLS 1.2.
+no changes will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
 TLS only.
 
@@ -115,10 +115,11 @@ are working on
 drafts to support hybrid algorithms and identifiers, for use during a
 transition from classic to a post-quantum world.
 
-For TLS it is important to note that the focus of these efforts is TLS 1.3
-or later.
+For TLS it is important to note that the focus of these efforts is exclusively
+TLS 1.3 or later.
 Put bluntly, post-quantum cryptography for
-TLS 1.2 WILL NOT be supported (see {{iana}}).
+TLS 1.2 WILL NOT be supported (see {{iana}}) at any time and anyone wishing
+to deploy post-quantum cryptography should expect to be using TLS 1.3.
 
 # IANA Considerations {#iana}
 
