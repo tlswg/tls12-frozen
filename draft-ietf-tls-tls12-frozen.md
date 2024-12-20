@@ -92,10 +92,6 @@ no changes will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
 TLS only.
 
-# Conventions and Definitions
-
-{::boilerplate bcp14-tagged}
-
 # Implications for post-quantum cryptography
 
 Cryptographically relevant quantum computers, once available, will have a
