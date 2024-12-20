@@ -117,6 +117,11 @@ Put bluntly, post-quantum cryptography for
 TLS 1.2 WILL NOT be supported (see {{iana}}) at any time and anyone wishing
 to deploy post-quantum cryptography should expect to be using TLS 1.3.
 
+# Security Considerations
+
+This entire document is about security, and provides post-quantum concerns
+as an additional reason to upgrade to TLS 1.3.
+
 # IANA Considerations {#iana}
 
 IANA will stop accepting registrations for any TLS parameters {{TLS13REG}}
