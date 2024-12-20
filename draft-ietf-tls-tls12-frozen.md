@@ -31,7 +31,7 @@ author:
 
 normative:
   TLS12: RFC5246
-  TLS13: RFC8446
+  TLS13: I-D.draft-ietf-tls-rfc8446bis
   TLS13REG: I-D.draft-ietf-tls-rfc8447bis
 
 informative:
