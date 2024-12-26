@@ -98,7 +98,8 @@ Cryptographically relevant quantum computers, once available, will have a
 huge impact on RSA, FFDH, and ECC which are currently used in TLS.
 In 2016, the US National Institute of Standards and Technology started a
 multi-year effort to standardize algorithms that will be "safe"
-once quantum computers are feasible {{PQC}}. First IETF discussions happened
+once quantum computers are feasible {{PQC}}. First discussions in
+the IETF IETF community happened
 around the same time {{CFRGSLIDES}}.
 
 In 2024 NIST released standards for {{ML-KEM}}, {{ML-DSA}}, and {{SLH-DSA}}.
