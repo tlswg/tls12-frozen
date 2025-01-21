@@ -1,7 +1,7 @@
 ---
 title: "TLS 1.2 is in Feature Freeze"
 abbrev: "tls1.2-frozen"
-category: info
+category: std
 
 docname: draft-ietf-tls-tls12-frozen-latest
 submissiontype: IETF
@@ -99,7 +99,7 @@ huge impact on RSA, FFDH, and ECC which are currently used in TLS.
 In 2016, the US National Institute of Standards and Technology started a
 multi-year effort to standardize algorithms that will be "safe"
 once quantum computers are feasible {{PQC}}. First discussions in
-the IETF IETF community happened
+the IETF community happened
 around the same time {{CFRGSLIDES}}.
 
 In 2024 NIST released standards for {{ML-KEM}}, {{ML-DSA}}, and {{SLH-DSA}}.
@@ -125,13 +125,18 @@ as an additional reason to upgrade to TLS 1.3.
 
 # IANA Considerations {#iana}
 
-IANA will stop accepting registrations for any TLS parameters {{TLS13REG}}
-except for the following:
+No registries are being closed by this document.
+Rather, this document modifies the instructions to IANA and the TLS
+Designed Experts to constrain what type of entries can be added.
+
+There are no limits on the registrations for either of
+the following two registries:
 
 - TLS Exporter Labels
 - TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs
 
-Entries in any other TLS protocol registry should have an indication like
-"For TLS 1.3 or later" in their entry.
+Entries in any other TLS protocol registry should have an informal indication
+indication like "For TLS 1.3 or later" in their entry. Anywhere is fine; the
+"Comment" column is a good place.
 
 --- back
