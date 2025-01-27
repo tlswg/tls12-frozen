@@ -125,18 +125,58 @@ as an additional reason to upgrade to TLS 1.3.
 
 # IANA Considerations {#iana}
 
-No registries are being closed by this document.
+No registries {{TLS13REG}} are being closed by this document.
 Rather, this document modifies the instructions to IANA and the TLS
 Designed Experts to constrain what type of entries can be added.
 
 There are no limits on the registrations for either of
 the following two registries:
 
-- TLS Exporter Labels
 - TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs
+- TLS Exporter Labels
 
-Entries in any other TLS protocol registry should have an informal indication
-indication like "For TLS 1.3 or later" in their entry. Anywhere is fine; the
-"Comment" column is a good place.
+All other registries should have this Note added to them:
+
+: Any entry added
+after the IESG approves publication of {THIS RFC} is intended for TLS 1.3 or
+later, and makes no requirement on DTLS.
+Such entries should have an informal indication
+indication like "For TLS 1.3 or later" in that entry, such as the
+"Comment" column.
+
+At the time of publication, the list of other registries is as follows:
+
+- TLS Alerts
+- TLS Authorization Data Formats
+- TLS CachedInformationType Values
+- TLS Certificate Compression Algorithm IDs
+- TLS Certificate Status Types
+- TLS Certificate Types
+- TLS Cipher Suites
+- TLS ClientCertificateType Identifiers
+- TLS ContentType
+- TLS EC Curve Types
+- TLS EC Point Formats
+- TLS ExtensionType Values
+- TLS HandshakeType
+- TLS HashAlgorithm
+- TLS Heartbeat Message Types
+- TLS Heartbeat Modes
+- TLS KDF Identifiers
+- TLS PskKeyExchangeMode
+- TLS SignatureAlgorithm
+- TLS SignatureScheme
+- TLS Supplemental Data Formats (SupplementalDataType)
+- TLS Supported Groups
+- TLS UserMappingType Values
+
+Any registries created after this document is approved for publication
+should indicate whether the actions defined here are applicable.
 
 --- back
+
+# Acknowledgments
+{:numbered="false"}
+
+We gratefully acknowledge Amanda Baber, David Dong, and Sabrina Tanamal
+of IANA for their help in revising and clarifying {{iana}}.
