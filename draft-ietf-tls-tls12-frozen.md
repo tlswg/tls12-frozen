@@ -141,7 +141,7 @@ All other registries should have this Note added to them:
 after the IESG approves publication of {THIS RFC} is intended for TLS 1.3 or
 later, and makes no requirement on DTLS.
 Such entries should have an informal indication
-indication like "For TLS 1.3 or later" in that entry, such as the
+like "For TLS 1.3 or later" in that entry, such as the
 "Comment" column.
 
 At the time of publication, the list of other registries is as follows:
