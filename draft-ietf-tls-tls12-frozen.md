@@ -113,8 +113,8 @@ are working on
 drafts to support hybrid algorithms and identifiers, for use during a
 transition from classic to a post-quantum world.
 
-For TLS it is important to note that the focus of these efforts is exclusively
-TLS 1.3 or later.
+For TLS it is important to note that the focus of efforts within the TLS Working Group
+is exclusively TLS 1.3 or later.
 Put bluntly, post-quantum cryptography for
 TLS 1.2 WILL NOT be supported (see {{iana}}) at any time and anyone wishing
 to deploy post-quantum cryptography should expect to be using TLS 1.3.
