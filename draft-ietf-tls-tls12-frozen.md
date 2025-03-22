@@ -79,7 +79,8 @@ TLS only.
 # Introduction {#sec-reasons}
 
 Use of TLS 1.3 {{TLS13}} is growing, and it
-fixes most known deficiencies with TLS 1.2 {{TLS12}}, such as
+fixes most known deficiencies with TLS 1.2 {{TLS12}}.
+Examples of this include
 encrypting more of the traffic so that it is not readable by outsiders and
 removing most cryptographic primitives now considered weak. Importantly, TLS
 1.3 enjoys robust security proofs.
