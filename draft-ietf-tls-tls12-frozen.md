@@ -63,10 +63,13 @@ informative:
   TLSWG:
     target: https://datatracker.ietf.org/wg/tls/about/
     title: Transport Layer Security
+  ETSI:
+    target: https://www.etsi.org/deliver/etsi_tr/103600_103699/103619/01.01.01_60/tr_103619v010101p.pdf
+    title: CYBER; Migration strategies and recommendations to Quantum Safe schemes
 
 --- abstract
 
-Use of TLS 1.3 is growing and fixes some known deficiencies in TLS 1.2.
+Use of TLS 1.3, which  fixes some known deficiencies in TLS 1.2, is growing.
 This document specifies that outside of
 urgent security fixes, new TLS Exporter Labels, or new
 Application-Layer Protocol Negotiation (ALPN) Protocol IDs,
@@ -85,7 +88,7 @@ encrypting more of the traffic so that it is not readable by outsiders and
 removing most cryptographic primitives now considered weak. Importantly, TLS
 1.3 enjoys robust security proofs.
 
-Both versions have several extension points, so items like new cryptographic
+Both versions have several extension points. Items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
 urgent security fixes, and the exceptions listed in {{iana}},
@@ -95,8 +98,9 @@ TLS only.
 
 # Implications for post-quantum cryptography
 
-Cryptographically relevant quantum computers, once available, will have a
-huge impact on RSA, FFDH, and ECC which are currently used in TLS.
+Cryptographically relevant quantum computers, once available, are likely to
+greatly lessen the time and effort needed to break
+RSA, FFDH, or ECC which are currently used in TLS.
 In 2016, the US National Institute of Standards and Technology started a
 multi-year effort to standardize algorithms that will be "safe"
 once quantum computers are feasible {{PQC}}. First discussions in
@@ -104,6 +108,9 @@ the IETF community happened
 around the same time {{CFRGSLIDES}}.
 
 In 2024 NIST released standards for {{ML-KEM}}, {{ML-DSA}}, and {{SLH-DSA}}.
+Many other countries and organizations are publishing their roadmaps,
+including the multi-national standards organization ETSI, {{ETSI}}.
+
 While industry was waiting for NIST to finish standardization, the
 IETF has had several efforts underway.
 A working group was formed in early 2023 to work on use of PQC in IETF protocols,
@@ -126,7 +133,7 @@ as an additional reason to upgrade to TLS 1.3.
 
 # IANA Considerations {#iana}
 
-No registries {{TLS13REG}} are being closed by this document.
+No TLS registries {{TLS13REG}} are being closed by this document.
 Rather, this document modifies the instructions to IANA and the TLS
 Designed Experts to constrain what type of entries can be added.
 
@@ -138,7 +145,7 @@ the following two registries:
 
 All other registries should have this Note added to them:
 
-: Any entry added
+: Any TLS entry added
 after the IESG approves publication of {THIS RFC} is intended for TLS 1.3 or
 later, and makes no requirement on DTLS.
 Such entries should have an informal indication
