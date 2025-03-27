@@ -93,15 +93,16 @@ algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
 urgent security fixes, and the exceptions listed in {{iana}},
 no changes will be approved for TLS 1.2.
-This prescription does not pertain to DTLS (in any DTLS version); it pertains to
-TLS only.
 
-# Implications for post-quantum cryptography
+This prescription pertains to TLS only. As such, it does not pertain to
+DTLS, in any DTLS version.
+
+# Implications for Post-Quantum Cryptography (PQC)
 
 Cryptographically relevant quantum computers, once available, are likely to
 greatly lessen the time and effort needed to break
-RSA, FFDH, or ECC which are currently used in TLS.
-In 2016, the US National Institute of Standards and Technology started a
+RSA, finite-field-based Diffie-Hellman (FFDH), or Elliptic Curve Cryptography (ECC) which are currently used in TLS.
+In 2016, the US National Institute of Standards and Technology (NIST) started a
 multi-year effort to standardize algorithms that will be "safe"
 once quantum computers are feasible {{PQC}}. First discussions in
 the IETF community happened
@@ -111,20 +112,20 @@ In 2024 NIST released standards for {{ML-KEM}}, {{ML-DSA}}, and {{SLH-DSA}}.
 Many other countries and organizations are publishing their roadmaps,
 including the multi-national standards organization ETSI, {{ETSI}}.
 
-While industry was waiting for NIST to finish standardization, the
+While the industry was waiting for NIST to finish standardization, the
 IETF has had several efforts underway.
-A working group was formed in early 2023 to work on use of PQC in IETF protocols,
+A working group was formed in early 2023 to work on use of Post-Quantum Cryptography (PQC) in IETF protocols
 {{PQUIPWG}}.
 Several other working groups, including TLS {{TLSWG}},
 are working on
-drafts to support hybrid algorithms and identifiers, for use during a
+specifications to support hybrid algorithms and identifiers, for use during a
 transition from classic to a post-quantum world.
 
-For TLS it is important to note that the focus of efforts within the TLS Working Group
+It is important to note that the focus of efforts within the TLS Working Group
 is exclusively TLS 1.3 or later.
-Put bluntly, post-quantum cryptography for
+Put bluntly, PQC for
 TLS 1.2 WILL NOT be supported (see {{iana}}) at any time and anyone wishing
-to deploy post-quantum cryptography should expect to be using TLS 1.3.
+to deploy PQC should expect to be using TLS 1.3.
 
 # Security Considerations
 
@@ -135,24 +136,25 @@ as an additional reason to upgrade to TLS 1.3.
 
 No TLS registries {{TLS13REG}} are being closed by this document.
 Rather, this document modifies the instructions to IANA and the TLS
-Designed Experts to constrain what type of entries can be added.
+Designed Experts to constrain what type of entries can be added to existing
+registries.
 
-There are no limits on the registrations for either of
+This document does not introduce any new limits on the registrations for either of
 the following two registries:
 
 - TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs
 - TLS Exporter Labels
 
-All other registries should have this Note added to them:
+All other TLS registries should have this Note added to them:
 
 : Any TLS entry added
 after the IESG approves publication of {THIS RFC} is intended for TLS 1.3 or
-later, and makes no requirement on DTLS.
+later, and makes no similar requirement on DTLS.
 Such entries should have an informal indication
 like "For TLS 1.3 or later" in that entry, such as the
 "Comment" column.
 
-At the time of publication, the list of other registries is as follows:
+At the time of publication, the list of other TLS registries is as follows:
 
 - TLS Alerts
 - TLS Authorization Data Formats
@@ -178,7 +180,7 @@ At the time of publication, the list of other registries is as follows:
 - TLS Supported Groups
 - TLS UserMappingType Values
 
-Any registries created after this document is approved for publication
+Any TLS registry created after this document is approved for publication
 should indicate whether the actions defined here are applicable.
 
 --- back
