@@ -8,31 +8,31 @@
 <meta content="Rich Salz" name="author">
 <meta content="Nimrod Aviram" name="author">
 <meta content="
-       Use of TLS 1.3 is growing and fixes some known deficiencies in TLS 1.2.
+       Use of TLS 1.3, which  fixes some known deficiencies in TLS 1.2, is growing.
 This document specifies that outside of
-urgent security fixes, new TLS Exporter Labels, or new
+urgent security fixes (as determine by TLS WG consensus), new TLS Exporter Labels, or new
 Application-Layer Protocol Negotiation (ALPN) Protocol IDs,
 no changes will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
 TLS only. 
     " name="description">
-<meta content="xml2rfc 3.25.0" name="generator">
+<meta content="xml2rfc 3.28.0" name="generator">
 <meta content="TLS" name="keyword">
 <meta content="features" name="keyword">
 <meta content="draft-ietf-tls-tls12-frozen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.25.0
+  xml2rfc 3.28.0
     Python 3.11.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
-    lxml 5.3.0
-    platformdirs 4.3.6
+    Jinja2 3.1.6
+    lxml 5.3.1
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
-    setuptools 75.6.0
+    setuptools 78.1.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-tls-tls12-frozen.xml" rel="alternate" type="application/rfc+xml">
@@ -443,7 +443,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -542,7 +542,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -1048,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">tls1.2-frozen</td>
-<td class="right">January 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salz &amp; Aviram</td>
-<td class="center">Expires 25 July 2025</td>
+<td class="center">Expires 3 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-tls-tls12-frozen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-21" class="published">21 January 2025</time>
+<time datetime="2025-04-01" class="published">1 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-25">25 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-03">3 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1086,9 +1090,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">TLS 1.2 is in Feature Freeze</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Use of TLS 1.3 is growing and fixes some known deficiencies in TLS 1.2.
+<p id="section-abstract-1">Use of TLS 1.3, which  fixes some known deficiencies in TLS 1.2, is growing.
 This document specifies that outside of
-urgent security fixes, new TLS Exporter Labels, or new
+urgent security fixes (as determine by TLS WG consensus), new TLS Exporter Labels, or new
 Application-Layer Protocol Negotiation (ALPN) Protocol IDs,
 no changes will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
@@ -1128,7 +1132,7 @@ TLS only.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1161,7 +1165,7 @@ TLS only.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-implications-for-post-quant" class="internal xref">Implications for post-quantum cryptography</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-implications-for-post-quant" class="internal xref">Implications for Post-Quantum Cryptography (PQC)</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1181,7 +1185,10 @@ TLS only.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1193,45 +1200,49 @@ TLS only.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Use of TLS 1.3 <span>[<a href="#TLS13" class="cite xref">TLS13</a>]</span> is growing, and it
-fixes most known deficiencies with TLS 1.2 <span>[<a href="#TLS12" class="cite xref">TLS12</a>]</span>, such as
+fixes most known deficiencies with TLS 1.2 <span>[<a href="#TLS12" class="cite xref">TLS12</a>]</span>.
+Examples of this include
 encrypting more of the traffic so that it is not readable by outsiders and
 removing most cryptographic primitives now considered weak. Importantly, TLS
 1.3 enjoys robust security proofs.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Both versions have several extension points, so items like new cryptographic
+<p id="section-1-2">Both versions have several extension points. Items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
-urgent security fixes, and the exceptions listed in <a href="#iana" class="auto internal xref">Section 4</a>,
-no changes will be approved for TLS 1.2.
-This prescription does not pertain to DTLS (in any DTLS version); it pertains to
-TLS only.<a href="#section-1-2" class="pilcrow">¶</a></p>
+urgent security fixes (as determine by TLS WG consensus), and the exceptions listed in <a href="#iana" class="auto internal xref">Section 4</a>,
+no changes will be approved for TLS 1.2.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">This prescription pertains to TLS only. As such, it does not pertain to
+DTLS, in any DTLS version.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="implications-for-post-quantum-cryptography">
+<div id="implications-for-post-quantum-cryptography-pqc">
 <section id="section-2">
       <h2 id="name-implications-for-post-quant">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-implications-for-post-quant" class="section-name selfRef">Implications for post-quantum cryptography</a>
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-implications-for-post-quant" class="section-name selfRef">Implications for Post-Quantum Cryptography (PQC)</a>
       </h2>
-<p id="section-2-1">Cryptographically relevant quantum computers, once available, will have a
-huge impact on RSA, FFDH, and ECC which are currently used in TLS.
-In 2016, the US National Institute of Standards and Technology started a
+<p id="section-2-1">Cryptographically relevant quantum computers, once available, are likely to
+greatly lessen the time and effort needed to break
+RSA, finite-field-based Diffie-Hellman (FFDH), or Elliptic Curve Cryptography (ECC) which are currently used in TLS.
+In 2016, the US National Institute of Standards and Technology (NIST) started a
 multi-year effort to standardize algorithms that will be "safe"
 once quantum computers are feasible <span>[<a href="#PQC" class="cite xref">PQC</a>]</span>. First discussions in
 the IETF community happened
 around the same time <span>[<a href="#CFRGSLIDES" class="cite xref">CFRGSLIDES</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">In 2024 NIST released standards for <span>[<a href="#ML-KEM" class="cite xref">ML-KEM</a>]</span>, <span>[<a href="#ML-DSA" class="cite xref">ML-DSA</a>]</span>, and <span>[<a href="#SLH-DSA" class="cite xref">SLH-DSA</a>]</span>.
-While industry was waiting for NIST to finish standardization, the
+Many other countries and organizations are publishing their roadmaps,
+including the multi-national standards organization ETSI, <span>[<a href="#ETSI" class="cite xref">ETSI</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">While the industry was waiting for NIST to finish standardization, the
 IETF has had several efforts underway.
-A working group was formed in early 2023 to work on use of PQC in IETF protocols,
+A working group was formed in early 2023 to work on use of Post-Quantum Cryptography (PQC) in IETF protocols
 <span>[<a href="#PQUIPWG" class="cite xref">PQUIPWG</a>]</span>.
 Several other working groups, including TLS <span>[<a href="#TLSWG" class="cite xref">TLSWG</a>]</span>,
 are working on
-drafts to support hybrid algorithms and identifiers, for use during a
-transition from classic to a post-quantum world.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">For TLS it is important to note that the focus of these efforts is exclusively
-TLS 1.3 or later.
-Put bluntly, post-quantum cryptography for
-TLS 1.2 WILL NOT be supported (see <a href="#iana" class="auto internal xref">Section 4</a>) at any time and anyone wishing
-to deploy post-quantum cryptography should expect to be using TLS 1.3.<a href="#section-2-3" class="pilcrow">¶</a></p>
+specifications to support hybrid algorithms and identifiers, for use during a
+transition from classic to a post-quantum world.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">It is important to note that the focus of efforts within the TLS Working Group
+is exclusively TLS 1.3 or later.
+Put bluntly, PQC for
+TLS 1.2 will not be specified (see <a href="#iana" class="auto internal xref">Section 4</a>) at any time and anyone wishing
+to deploy PQC should expect to be using TLS 1.3.<a href="#section-2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1248,22 +1259,106 @@ as an additional reason to upgrade to TLS 1.3.<a href="#section-3-1" class="pilc
       <h2 id="name-iana-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-4-1">No registries are being closed by this document.
+<p id="section-4-1">No TLS registries <span>[<a href="#TLS13REG" class="cite xref">TLS13REG</a>]</span> are being closed by this document.
 Rather, this document modifies the instructions to IANA and the TLS
-Designed Experts to constrain what type of entries can be added.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">There are no limits on the registrations for either of
+Designed Experts to constrain what type of entries can be added to existing
+registries.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">This document does not introduce any new limits on the registrations for either of
 the following two registries:<a href="#section-4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-3.1">
-          <p id="section-4-3.1.1">TLS Exporter Labels<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-3.1.1">TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-3.2">
-          <p id="section-4-3.2.1">TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-3.2.1">TLS Exporter Labels<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-4">Entries in any other TLS protocol registry should have an informal indication
-indication like "For TLS 1.3 or later" in their entry. Anywhere is fine; the
-"Comment" column is a good place.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4-4">
+        <dt id="section-4-4.1">All other TLS registries should have this Note added to them:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-4.2">
+          <p id="section-4-4.2.1">Any TLS entry added
+after the IESG approves publication of {THIS RFC} is intended for TLS 1.3 or
+later, and makes no similar requirement on DTLS.
+Such entries should have an informal indication
+like "For TLS 1.3 or later" in that entry, such as the
+"Comment" column.<a href="#section-4-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-4-5">At the time of publication, the list of other TLS registries is as follows:<a href="#section-4-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-6.1">
+          <p id="section-4-6.1.1">TLS Alerts<a href="#section-4-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.2">
+          <p id="section-4-6.2.1">TLS Authorization Data Formats<a href="#section-4-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.3">
+          <p id="section-4-6.3.1">TLS CachedInformationType Values<a href="#section-4-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.4">
+          <p id="section-4-6.4.1">TLS Certificate Compression Algorithm IDs<a href="#section-4-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.5">
+          <p id="section-4-6.5.1">TLS Certificate Status Types<a href="#section-4-6.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.6">
+          <p id="section-4-6.6.1">TLS Certificate Types<a href="#section-4-6.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.7">
+          <p id="section-4-6.7.1">TLS Cipher Suites<a href="#section-4-6.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.8">
+          <p id="section-4-6.8.1">TLS ClientCertificateType Identifiers<a href="#section-4-6.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.9">
+          <p id="section-4-6.9.1">TLS ContentType<a href="#section-4-6.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.10">
+          <p id="section-4-6.10.1">TLS EC Curve Types<a href="#section-4-6.10.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.11">
+          <p id="section-4-6.11.1">TLS EC Point Formats<a href="#section-4-6.11.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.12">
+          <p id="section-4-6.12.1">TLS ExtensionType Values<a href="#section-4-6.12.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.13">
+          <p id="section-4-6.13.1">TLS HandshakeType<a href="#section-4-6.13.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.14">
+          <p id="section-4-6.14.1">TLS HashAlgorithm<a href="#section-4-6.14.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.15">
+          <p id="section-4-6.15.1">TLS Heartbeat Message Types<a href="#section-4-6.15.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.16">
+          <p id="section-4-6.16.1">TLS Heartbeat Modes<a href="#section-4-6.16.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.17">
+          <p id="section-4-6.17.1">TLS KDF Identifiers<a href="#section-4-6.17.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.18">
+          <p id="section-4-6.18.1">TLS PskKeyExchangeMode<a href="#section-4-6.18.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.19">
+          <p id="section-4-6.19.1">TLS SignatureAlgorithm<a href="#section-4-6.19.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.20">
+          <p id="section-4-6.20.1">TLS SignatureScheme<a href="#section-4-6.20.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.21">
+          <p id="section-4-6.21.1">TLS Supplemental Data Formats (SupplementalDataType)<a href="#section-4-6.21.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.22">
+          <p id="section-4-6.22.1">TLS Supported Groups<a href="#section-4-6.22.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-6.23">
+          <p id="section-4-6.23.1">TLS UserMappingType Values<a href="#section-4-6.23.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-7">Any TLS registry created after this document is approved for publication
+should indicate whether the actions defined here are applicable.<a href="#section-4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1283,11 +1378,11 @@ indication like "For TLS 1.3 or later" in their entry. Anywhere is fine; the
 <dd class="break"></dd>
 <dt id="TLS13">[TLS13]</dt>
         <dd>
-<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-rfc8446bis-11</span>, <time datetime="2024-09-14" class="refDate">14 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-11">https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-rfc8446bis-12</span>, <time datetime="2025-02-17" class="refDate">17 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-12">https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8446bis-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TLS13REG">[TLS13REG]</dt>
       <dd>
-<span class="refAuthor">Salowey, J. A.</span> and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"IANA Registry Updates for TLS and DTLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-rfc8447bis-10</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8447bis-10">https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8447bis-10</a>&gt;</span>. </dd>
+<span class="refAuthor">Salowey, J. A.</span> and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"IANA Registry Updates for TLS and DTLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-rfc8447bis-11</span>, <time datetime="2025-03-11" class="refDate">11 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8447bis-11">https://datatracker.ietf.org/doc/html/draft-ietf-tls-rfc8447bis-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1301,6 +1396,10 @@ indication like "For TLS 1.3 or later" in their entry. Anywhere is fine; the
 <dt id="CFRGSLIDES">[CFRGSLIDES]</dt>
         <dd>
 <span class="refAuthor">McGrew, D.</span>, <span class="refTitle">"Post Quantum Secure Cryptography Discussion"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.ietf.org/proceedings/95/slides/slides-95-cfrg-4.pdf">https://www.ietf.org/proceedings/95/slides/slides-95-cfrg-4.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ETSI">[ETSI]</dt>
+        <dd>
+<span class="refTitle">"CYBER; Migration strategies and recommendations to Quantum Safe schemes"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.etsi.org/deliver/etsi_tr/103600_103699/103619/01.01.01_60/tr_103619v010101p.pdf">https://www.etsi.org/deliver/etsi_tr/103600_103699/103619/01.01.01_60/tr_103619v010101p.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ML-DSA">[ML-DSA]</dt>
         <dd>
@@ -1331,8 +1430,17 @@ indication like "For TLS 1.3 or later" in their entry. Anywhere is fine; the
 </div>
 </section>
 </div>
-<div id="authors-addresses">
+<div id="acknowledgments">
 <section id="appendix-A">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-A-1">We gratefully acknowledge Amanda Baber, David Dong, and Sabrina Tanamal
+of IANA for their help in revising and clarifying <a href="#iana" class="auto internal xref">Section 4</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
