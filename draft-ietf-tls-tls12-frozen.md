@@ -71,7 +71,7 @@ informative:
 
 Use of TLS 1.3, which  fixes some known deficiencies in TLS 1.2, is growing.
 This document specifies that outside of
-urgent security fixes, new TLS Exporter Labels, or new
+urgent security fixes (as determine by TLS WG consensus), new TLS Exporter Labels, or new
 Application-Layer Protocol Negotiation (ALPN) Protocol IDs,
 no changes will be approved for TLS 1.2.
 This prescription does not pertain to DTLS (in any DTLS version); it pertains to
@@ -91,7 +91,7 @@ removing most cryptographic primitives now considered weak. Importantly, TLS
 Both versions have several extension points. Items like new cryptographic
 algorithms, new supported groups (formerly "named curves"),  etc., can be
 added without defining a new protocol. This document specifies that outside of
-urgent security fixes, and the exceptions listed in {{iana}},
+urgent security fixes (as determine by TLS WG consensus), and the exceptions listed in {{iana}},
 no changes will be approved for TLS 1.2.
 
 This prescription pertains to TLS only. As such, it does not pertain to
@@ -124,7 +124,7 @@ transition from classic to a post-quantum world.
 It is important to note that the focus of efforts within the TLS Working Group
 is exclusively TLS 1.3 or later.
 Put bluntly, PQC for
-TLS 1.2 WILL NOT be supported (see {{iana}}) at any time and anyone wishing
+TLS 1.2 will not be specified (see {{iana}}) at any time and anyone wishing
 to deploy PQC should expect to be using TLS 1.3.
 
 # Security Considerations
